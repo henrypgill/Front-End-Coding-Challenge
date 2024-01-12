@@ -5,38 +5,15 @@ import { dummyTableData } from '../../data/dummyData';
 import { ButtonGroup, Button, AnchorButton } from '@blueprintjs/core';
 import { useAppDispatch } from '../../redux/store';
 import { opviaTableActions } from '../../redux/opviaTableSlice';
+import ColumnActionsMenu from './ColumnActionsMenu';
+import AnalyseActionsMenu from './AnalyseActionsMenu';
 
 const TableButtons: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const tableActions = opviaTableActions;
-
-  const addColumnHandler = () => {
-    dispatch(
-      tableActions.addColumn({
-        columnName: 'Name',
-        columnType: 'data',
-        columnId: 'var_col_3',
-      }),
-    );
-  };
-
-  const buttons = () => {
-    return (
-      <>
-        <Button
-          icon="add-column-right"
-          rightIcon="caret-down"
-          onClick={addColumnHandler}
-        >
-          Add Column
-        </Button>
-      </>
-    );
-  };
-
   return (
     <div>
-      <ButtonGroup minimal={true} children={buttons()}></ButtonGroup>
+      <ButtonGroup minimal={true}>
+        <ColumnActionsMenu />
+      </ButtonGroup>
     </div>
   );
 };
