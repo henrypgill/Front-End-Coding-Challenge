@@ -2,6 +2,7 @@ import { Classes } from '@blueprintjs/core';
 import React from 'react';
 import './App.css';
 import OpviaTable from './table/OpviaTable';
+import TableGroup from './table/TableGroup';
 
 const App: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ const App: React.FC = () => {
         <a href="https://github.com/opvia/column-cals-interview">here.</a>
       </div>
       <div style={{ padding: 75 }}>
-        <OpviaTable />
+        <TableGroup />
       </div>
     </div>
   );
