@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { Cell, Column, ColumnProps, Table2 } from '@blueprintjs/table';
-import { dummyTableData } from '../data/dummyData';
-import { OpviaTableColumn } from '../redux/opviaTableSlice';
+import { dummyTableData } from '../../data/dummyData';
+import { OpviaTableColumn } from '../../redux/opviaTableSlice';
 
 export interface OpviaTableProps {
   columns: OpviaTableColumn[];
