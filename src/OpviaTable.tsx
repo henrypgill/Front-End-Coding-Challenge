@@ -34,7 +34,12 @@ const OpviaTable: React.FC = () => {
   ));
 
   return (
-    <Table2 defaultRowHeight={35} numRows={95}>
+    <Table2
+      defaultRowHeight={35}
+      numRows={95}
+      enableFocusedCell={true}
+      enableRowReordering={true}
+    >
       {cols}
     </Table2>
   );
