@@ -1,4 +1,7 @@
-export const dummyTableData: { [key: string]: string | number } = {
+import { TableData } from "../redux/opviaTableSlice";
+
+
+export const dummyTableData: TableData = {
   '0-0': '2021-01-01T20:00:00Z',
   '0-1': '2021-01-01T21:00:00Z',
   '0-2': '2021-01-01T22:00:00Z',
