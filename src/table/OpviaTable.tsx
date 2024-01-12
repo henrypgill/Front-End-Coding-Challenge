@@ -1,24 +1,24 @@
 import * as React from 'react';
 
-import { Cell, Column, Table2 } from '@blueprintjs/table';
+import { Cell, Column, ColumnProps, Table2 } from '@blueprintjs/table';
 import { dummyTableData } from '../data/dummyData';
 
+export interface ColumnInput {
+  columnName: string;
+  columnType: string;
+  columnId: string;
 
-const OpviaTable: React.FC = () => {
+}
+
+export interface OpviaTableProps {
+  columns: ColumnInput[];
+}
+
+const OpviaTable: React.FC<OpviaTableProps> = ({columns}: OpviaTableProps) => {
 
 
 
-  const defaultColumns = [
-    { columnName: 'Time', columnType: 'time', columnId: 'time_col' },
-    {
-      columnName: 'Cell Density (Cell Count/Litre)',
-      columnType: 'data',
-      columnId: 'var_col_1',
-    },
-    { columnName: 'Volume (Litres)', columnType: 'data', columnId: 'var_col_2' },
-  ];
 
-  const [columns, setColumns] = React.useState(defaultColumns)
 
 
   const getSparseRefFromIndexes = (
