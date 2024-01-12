@@ -6,7 +6,7 @@ const TableGroup = () => {
 
     return (
         <>
-
+        <TableButtons />
         <OpviaTable />
         </>
     )
