@@ -2,23 +2,15 @@ import * as React from 'react';
 
 import { Cell, Column, ColumnProps, Table2 } from '@blueprintjs/table';
 import { dummyTableData } from '../data/dummyData';
+import { OpviaTableColumn } from '../redux/opviaTableSlice';
 
-export interface ColumnInput {
-  columnName: string;
-  columnType: string;
-  columnId: string;
 
-}
 
 export interface OpviaTableProps {
-  columns: ColumnInput[];
+  columns: OpviaTableColumn[];
 }
 
 const OpviaTable: React.FC<OpviaTableProps> = ({columns}: OpviaTableProps) => {
-
-
-
-
 
 
   const getSparseRefFromIndexes = (
@@ -45,7 +37,7 @@ const OpviaTable: React.FC<OpviaTableProps> = ({columns}: OpviaTableProps) => {
       defaultRowHeight={35}
       numRows={95}
       enableFocusedCell={true}
-      enableRowReordering={true}
+      enableColumnReordering={true}
     >
       {cols}
     </Table2>
