@@ -11,7 +11,7 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <HotkeysProvider>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
   </HotkeysProvider>,
 );

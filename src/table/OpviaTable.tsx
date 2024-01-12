@@ -4,15 +4,13 @@ import { Cell, Column, ColumnProps, Table2 } from '@blueprintjs/table';
 import { dummyTableData } from '../data/dummyData';
 import { OpviaTableColumn } from '../redux/opviaTableSlice';
 
-
-
 export interface OpviaTableProps {
   columns: OpviaTableColumn[];
 }
 
-const OpviaTable: React.FC<OpviaTableProps> = ({columns}: OpviaTableProps) => {
-
-
+const OpviaTable: React.FC<OpviaTableProps> = ({
+  columns,
+}: OpviaTableProps) => {
   const getSparseRefFromIndexes = (
     rowIndex: number,
     columnIndex: number,

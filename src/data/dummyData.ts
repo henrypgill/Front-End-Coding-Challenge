@@ -1,5 +1,4 @@
-import { TableData } from "../redux/opviaTableSlice";
-
+import { TableData } from '../redux/opviaTableSlice';
 
 export const dummyTableData: TableData = {
   '0-0': '2021-01-01T20:00:00Z',

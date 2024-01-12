@@ -1,9 +1,9 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-import { dummyTableData } from "../data/dummyData";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
+import { dummyTableData } from '../data/dummyData';
 
 // define the type for the data containing object that is passed to the table
-export type TableData = { [key: string]: string | number }
+export type TableData = { [key: string]: string | number };
 
 // define an interface that represents a column to be rendered in the table
 export interface OpviaTableColumn {
@@ -33,11 +33,11 @@ const defaultColumns = [
 const initialState = {
   data: dummyTableData,
   columns: defaultColumns,
-}
+};
 
 // create the redux slice
 export const opviaTableSlice = createSlice({
-  name: "opviaTable",
+  name: 'opviaTable',
   initialState,
   reducers: {
     addColumn: (state, action: PayloadAction<OpviaTableColumn>) => {
@@ -45,7 +45,6 @@ export const opviaTableSlice = createSlice({
     },
   },
 });
-
 
 // export the slice's reducer
 export default opviaTableSlice.reducer;
