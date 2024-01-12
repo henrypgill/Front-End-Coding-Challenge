@@ -1,7 +1,7 @@
 import { Classes } from '@blueprintjs/core';
 import React from 'react';
 import './App.css';
-import OpviaTable from './OpviaTable';
+import OpviaTable from './table/OpviaTable';
 
 const App: React.FC = () => {
   return (
