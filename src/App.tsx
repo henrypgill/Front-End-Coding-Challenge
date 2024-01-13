@@ -11,7 +11,7 @@ const App: React.FC = () => {
             <div>
                 <OpviaNavbar />
             </div>
-            <div style={{ padding: 75 }}>
+            <div style={{ padding:  0}}>
                 <TableGroup />
             </div>
         </div>
