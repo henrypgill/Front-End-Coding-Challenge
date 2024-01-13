@@ -38,6 +38,7 @@ const OpviaTable: React.FC = () => {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const getFunctionCellRenderer = (columnFunction: ColumnFunction) => {
+        return emptyCellRenderer
         const functionCellRenderer: CellRenderer = (
             rowIndex: number,
             columnIndex: number,
