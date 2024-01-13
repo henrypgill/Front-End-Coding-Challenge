@@ -7,36 +7,36 @@ export type TableData = { [key: string]: string | number };
 
 // define an interface that represents a column to be rendered in the table
 export interface OpviaTableColumn {
-  columnName: string;
-  columnType: string;
-  columnId: string;
+    columnName: string;
+    columnType: string;
+    columnId: string;
 }
 
 // define an interface for the state of the OpviaTable
 export interface OpviaTableState {
-  data: TableData;
-  columns: OpviaTableColumn[];
+    data: TableData;
+    columns: OpviaTableColumn[];
 }
 
 // declare the initial state of the columns for the table
 const defaultColumns = [
-  { columnName: 'Time', columnType: 'time', columnId: 'time_col' },
-  {
-    columnName: 'Cell Density (Cell Count/Litre)',
-    columnType: 'data',
-    columnId: 'var_col_1',
-  },
-  {
-    columnName: 'Volume (Litres)',
-    columnType: 'data',
-    columnId: 'var_col_2',
-  },
+    { columnName: 'Time', columnType: 'time', columnId: 'time_col' },
+    {
+        columnName: 'Cell Density (Cell Count/Litre)',
+        columnType: 'data',
+        columnId: 'var_col_1',
+    },
+    {
+        columnName: 'Volume (Litres)',
+        columnType: 'data',
+        columnId: 'var_col_2',
+    },
 ];
 
 // declare the initial state for the slice
 const initialState = {
-  data: dummyTableData,
-  columns: defaultColumns,
+    data: dummyTableData,
+    columns: defaultColumns,
 };
 
 // create the redux slice

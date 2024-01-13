@@ -9,13 +9,13 @@ import ColumnActionsMenu from './ColumnActionsMenu';
 import AnalyseActionsMenu from './AnalyseActionsMenu';
 
 const TableButtons: React.FC = () => {
-  return (
-    <div>
-      <ButtonGroup minimal={true}>
-        <ColumnActionsMenu />
-      </ButtonGroup>
-    </div>
-  );
+    return (
+        <div>
+            <ButtonGroup minimal={true}>
+                <ColumnActionsMenu />
+            </ButtonGroup>
+        </div>
+    );
 };
 
 export default TableButtons;
