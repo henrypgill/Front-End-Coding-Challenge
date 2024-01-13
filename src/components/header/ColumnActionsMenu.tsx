@@ -8,13 +8,14 @@ import {
 } from '@blueprintjs/core';
 import { useAppDispatch } from '../../redux/store';
 import { opviaTableActions } from '../../redux/opviaTableSlice';
+import * as React from 'react';
+import CreateFxColumnDialog from './CreateFxColumnDialog';
 
-
-const ColumnActionsMenu: React.FC = () => {
+const AddFxColumn: React.FC = () => {
   const dispatch = useAppDispatch();
   const tableActions = opviaTableActions;
 
-  const addFunctionColumnHandler = () => {
+  const addFxColumnHandler = () => {
     dispatch(
       tableActions.addColumn({
         columnName: 'Name',
@@ -24,16 +25,25 @@ const ColumnActionsMenu: React.FC = () => {
     );
   };
 
+
+  return (
+    <>
+        <MenuItem
+        icon="derive-column"
+        onClick={addFxColumnHandler}
+        text="Function Column"
+        >
+        </MenuItem>
+        </>
+  );
+};
+
+const ColumnActionsMenu: React.FC = () => {
   const columnMenu = (
     <Menu>
-      <MenuItem
-        icon="derive-column"
-        onClick={addFunctionColumnHandler}
-        text="Function Column"
-      />
+      <AddFxColumn />
     </Menu>
   );
-
 
   return (
     <Popover content={columnMenu} fill={true} placement="bottom">
