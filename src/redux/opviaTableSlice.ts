@@ -10,7 +10,12 @@ export type TableData = {
 
 // define types and an interface that represents a column to be rendered in the table
 export type ColumnType = 'time' | 'number' | 'string' | 'function';
-export type ColumnFunction = void;
+export type ColumnFunctionOperator = "*" | "/" | "+" | "-"
+export interface ColumnFunction {
+    colIndex1: number;
+    colIndex2: number;
+    operator: ColumnFunctionOperator;
+}
 
 export interface OpviaTableColumn {
     columnName: string;
@@ -50,6 +55,18 @@ const defaultColumns: OpviaTableColumn[] = [
         columnIndex: 2,
         columnUnits: "Litres",
     },
+    {
+        columnName: 'Column Name',
+        columnType: 'function',
+        columnId: `fx_col_3`,
+        columnIndex: 3,
+        columnUnits: "units",
+        columnFunction: {
+            colIndex1: 1,
+            colIndex2: 2,
+            operator: "*"
+        }
+    }
 ];
 
 // declare the initial state for the slice
@@ -70,8 +87,19 @@ export const opviaTableSlice = createSlice({
                 columnId: `fx_col_${state.columns.length}`,
                 columnIndex: state.columns.length,
                 columnUnits: "units",
+                columnFunction: {
+                    colIndex1: 1,
+                    colIndex2: 2,
+                    operator: "/"
+                }
             });
         },
+        updateColumnFunction: (state, {payload}: PayloadAction<{columnIndex: number, columnFunction: ColumnFunction}>) => {
+            const col = state.columns.find(col => col.columnIndex === payload.columnIndex)
+            if (col) {
+                col.columnFunction = payload.columnFunction
+            }
+        }
     },
 });
 
