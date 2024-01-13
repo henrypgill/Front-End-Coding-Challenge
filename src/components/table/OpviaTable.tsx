@@ -10,7 +10,7 @@ export interface OpviaTableProps {
 
 const OpviaTable: React.FC<OpviaTableProps> = ({
   columns,
-}: OpviaTableProps) => {
+}) => {
   const getSparseRefFromIndexes = (
     rowIndex: number,
     columnIndex: number,
