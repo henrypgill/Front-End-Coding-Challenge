@@ -1,5 +1,5 @@
 import { Cell } from '@blueprintjs/table';
-import { dummyTableData } from '../../data/dummyData';
+import { dummyTableData } from '../data/dummyData';
 
 function formatCellDeltaTime(
     time: string | number,
