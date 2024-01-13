@@ -26,7 +26,11 @@ const defaultColumns = [
     columnType: 'data',
     columnId: 'var_col_1',
   },
-  { columnName: 'Volume (Litres)', columnType: 'data', columnId: 'var_col_2' },
+  {
+    columnName: 'Volume (Litres)',
+    columnType: 'data',
+    columnId: 'var_col_2',
+  },
 ];
 
 // declare the initial state for the slice
