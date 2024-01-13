@@ -4,6 +4,7 @@ import {
     Cell,
     CellRenderer,
     Column,
+    ColumnHeaderCell2,
     ColumnProps,
     Table2,
 } from '@blueprintjs/table';
@@ -15,12 +16,9 @@ import {
 } from '../../redux/opviaTableSlice';
 import { useAppSelector } from '../../redux/store';
 
-export interface OpviaTableProps {
-    columns: OpviaTableColumn[];
-}
 
-const OpviaTable: React.FC<OpviaTableProps> = ({ columns }) => {
-    const { data } = useAppSelector((state) => state.opviaTable);
+const OpviaTable: React.FC = () => {
+    const { data, columns } = useAppSelector((state) => state.opviaTable);
 
     const emptyCellRenderer: CellRenderer = (
         rowIndex: number,
@@ -69,6 +67,40 @@ const OpviaTable: React.FC<OpviaTableProps> = ({ columns }) => {
         }
     };
 
+    const functionColumnHeaderCellRenderer = () => {
+
+    }
+
+    const columnNameRenderer = (column: OpviaTableColumn) => {
+        return (
+            <div>
+                <div>
+                    <strong>{column.columnName}</strong>
+                </div>
+                <div>
+                    {column.columnUnits}
+                </div>
+            </div>
+        )
+    }
+
+    const dataColumnHeaderCellRenderer = (colIndex: number) => {
+        const column = columns.filter(col => col.columnIndex === colIndex)[0]
+        return (
+            <ColumnHeaderCell2 nameRenderer={() => columnNameRenderer(column)}></ColumnHeaderCell2>
+        )
+    }
+
+
+    const getHeaderCellRenderer = (columnType: ColumnType) => {
+        switch (columnType) {
+            case 'function':
+                return dataColumnHeaderCellRenderer;
+            default:
+                return dataColumnHeaderCellRenderer;
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const cols = columns.map((column) => {
@@ -76,6 +108,7 @@ const OpviaTable: React.FC<OpviaTableProps> = ({ columns }) => {
             <Column
                 key={`${column.columnId}`}
                 cellRenderer={getCellRenderer(column.columnType)}
+                columnHeaderCellRenderer={getHeaderCellRenderer(column.columnType)}
                 name={column.columnName}
             />
         );
