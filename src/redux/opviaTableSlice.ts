@@ -44,7 +44,7 @@ export const opviaTableSlice = createSlice({
   name: 'opviaTable',
   initialState,
   reducers: {
-    addColumn: (state, action: PayloadAction<OpviaTableColumn>) => {
+    addFxColumn: (state, action: PayloadAction<OpviaTableColumn>) => {
       state.columns.push(action.payload);
     },
   },

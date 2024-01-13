@@ -17,7 +17,7 @@ const AddFxColumn: React.FC = () => {
 
   const addFxColumnHandler = () => {
     dispatch(
-      tableActions.addColumn({
+      tableActions.addFxColumn({
         columnName: 'Name',
         columnType: 'data',
         columnId: 'var_col_3',
