@@ -6,16 +6,16 @@ import TableGroup from './components/table/TableGroup';
 import OpviaNavbar from './components/header/OpviaNavbar';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <div>
-        <OpviaNavbar />
-      </div>
-      <div style={{ padding: 75 }}>
-        <TableGroup />
-      </div>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div>
+                <OpviaNavbar />
+            </div>
+            <div style={{ padding: 0 }}>
+                <TableGroup />
+            </div>
+        </div>
+    );
 };
 
 export default App;

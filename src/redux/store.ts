@@ -8,9 +8,9 @@ type AppDispatch = typeof store.dispatch;
 
 // declare and export the redux store
 const store = configureStore({
-  reducer: {
-    opviaTable: opviaTableReducer,
-  },
+    reducer: {
+        opviaTable: opviaTableReducer,
+    },
 });
 export default store;
 

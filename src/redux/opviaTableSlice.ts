@@ -1,53 +1,116 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { dummyTableData } from '../data/dummyData';
+import { mapData } from '../data/mapData';
 
 // define the type for the data containing object that is passed to the table
-export type TableData = { [key: string]: string | number };
+export type TableData = {
+    [key: string]: { [key: string]: string | number };
+};
 
-// define an interface that represents a column to be rendered in the table
+// define types and an interface that represents a column to be rendered in the table
+export type ColumnType = 'time' | 'number' | 'string' | 'function';
+export type ColumnFunctionOperator = '*' | '/' | '+' | '-';
+export interface ColumnFunction {
+    colIndex1: number;
+    colIndex2: number;
+    operator: ColumnFunctionOperator;
+}
+
 export interface OpviaTableColumn {
-  columnName: string;
-  columnType: string;
-  columnId: string;
+    columnName: string;
+    columnType: ColumnType;
+    columnId: string;
+    columnFunction?: ColumnFunction;
+    columnUnits: string;
+    columnIndex: number;
 }
 
 // define an interface for the state of the OpviaTable
 export interface OpviaTableState {
-  data: TableData;
-  columns: OpviaTableColumn[];
+    data: TableData;
+    columns: OpviaTableColumn[];
 }
 
 // declare the initial state of the columns for the table
-const defaultColumns = [
-  { columnName: 'Time', columnType: 'time', columnId: 'time_col' },
-  {
-    columnName: 'Cell Density (Cell Count/Litre)',
-    columnType: 'data',
-    columnId: 'var_col_1',
-  },
-  {
-    columnName: 'Volume (Litres)',
-    columnType: 'data',
-    columnId: 'var_col_2',
-  },
+const defaultColumns: OpviaTableColumn[] = [
+    {
+        columnName: 'Time',
+        columnType: 'time',
+        columnId: 'time_col',
+        columnIndex: 0,
+        columnUnits: 'seconds',
+    },
+    {
+        columnName: 'Cell Density',
+        columnType: 'number',
+        columnId: 'var_col_1',
+        columnIndex: 1,
+        columnUnits: 'Cell Count/Litre',
+    },
+    {
+        columnName: 'Volume',
+        columnType: 'number',
+        columnId: 'var_col_2',
+        columnIndex: 2,
+        columnUnits: 'Litres',
+    },
+    {
+        columnName: 'Column Name',
+        columnType: 'function',
+        columnId: `fx_col_3`,
+        columnIndex: 3,
+        columnUnits: 'units',
+        columnFunction: {
+            colIndex1: 1,
+            colIndex2: 2,
+            operator: '*',
+        },
+    },
 ];
 
 // declare the initial state for the slice
-const initialState = {
-  data: dummyTableData,
-  columns: defaultColumns,
+const initialState: OpviaTableState = {
+    data: mapData(dummyTableData),
+    columns: defaultColumns,
 };
 
 // create the redux slice
 export const opviaTableSlice = createSlice({
-  name: 'opviaTable',
-  initialState,
-  reducers: {
-    addColumn: (state, action: PayloadAction<OpviaTableColumn>) => {
-      state.columns.push(action.payload);
+    name: 'opviaTable',
+    initialState,
+    reducers: {
+        addFxColumn: (state) => {
+            state.columns.push({
+                columnName: 'Column Name',
+                columnType: 'function',
+                columnId: `fx_col_${state.columns.length}`,
+                columnIndex: state.columns.length,
+                columnUnits: 'units',
+                columnFunction: {
+                    colIndex1: 1,
+                    colIndex2: 2,
+                    operator: '/',
+                },
+            });
+        },
+        updateColumnFunction: (
+            state,
+            {
+                payload,
+            }: PayloadAction<{
+                columnIndex: number;
+                columnFunction: ColumnFunction;
+            }>,
+        ) => {
+            const col = state.columns.find(
+                (col) => col.columnIndex === payload.columnIndex,
+            );
+            if (col) {
+                col.columnFunction = payload.columnFunction;
+            }
+        },
     },
-  },
 });
 
 // export the slice's reducer
