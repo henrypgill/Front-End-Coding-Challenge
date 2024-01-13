@@ -16,13 +16,7 @@ const AddFxColumn: React.FC = () => {
     const tableActions = opviaTableActions;
 
     const addFxColumnHandler = () => {
-        dispatch(
-            tableActions.addFxColumn({
-                columnName: 'Name',
-                columnType: 'number',
-                columnId: 'var_col_3',
-            }),
-        );
+        dispatch(tableActions.addFxColumn());
     };
 
     return (
