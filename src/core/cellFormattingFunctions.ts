@@ -12,3 +12,4 @@ function formatCellDeltaTime(
 function formatCellNumber(value: string): string {
     return String(value);
 }
+
