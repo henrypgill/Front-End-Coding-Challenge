@@ -15,16 +15,15 @@ const AddFxColumn: React.FC = () => {
     const dispatch = useAppDispatch();
     const tableActions = opviaTableActions;
 
-  const addFxColumnHandler = () => {
-    dispatch(
-      tableActions.addFxColumn({
-        columnName: 'Name',
-        columnType: 'data',
-        columnId: 'var_col_3',
-      }),
-    );
-  };
-
+    const addFxColumnHandler = () => {
+        dispatch(
+            tableActions.addFxColumn({
+                columnName: 'Name',
+                columnType: 'number',
+                columnId: 'var_col_3',
+            }),
+        );
+    };
 
     return (
         <>

@@ -21,7 +21,6 @@ export function mapData(dataSet: { [key: string]: string | number }) {
     return mappedData;
 }
 
-
 // keeping old functions from OpviaTable for reference
 // const getSparseRefFromIndexes = (
 //     rowIndex: number,
