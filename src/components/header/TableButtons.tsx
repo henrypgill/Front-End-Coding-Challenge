@@ -6,7 +6,6 @@ import { ButtonGroup, Button, AnchorButton } from '@blueprintjs/core';
 import { useAppDispatch } from '../../redux/store';
 import { opviaTableActions } from '../../redux/opviaTableSlice';
 import ColumnActionsMenu from './ColumnActionsMenu';
-import AnalyseActionsMenu from './AnalyseActionsMenu';
 
 const TableButtons: React.FC = () => {
     return (
