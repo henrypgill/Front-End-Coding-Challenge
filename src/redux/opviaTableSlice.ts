@@ -10,7 +10,7 @@ export type TableData = {
 
 // define types and an interface that represents a column to be rendered in the table
 export type ColumnType = 'time' | 'number' | 'string' | 'function';
-export type ColumnFunctionOperator = "*" | "/" | "+" | "-"
+export type ColumnFunctionOperator = '*' | '/' | '+' | '-';
 export interface ColumnFunction {
     colIndex1: number;
     colIndex2: number;
@@ -37,36 +37,36 @@ const defaultColumns: OpviaTableColumn[] = [
     {
         columnName: 'Time',
         columnType: 'time',
-        columnId: 'time_col' ,
+        columnId: 'time_col',
         columnIndex: 0,
-        columnUnits: "seconds",
-},
+        columnUnits: 'seconds',
+    },
     {
         columnName: 'Cell Density',
         columnType: 'number',
         columnId: 'var_col_1',
         columnIndex: 1,
-        columnUnits: "Cell Count/Litre",
+        columnUnits: 'Cell Count/Litre',
     },
     {
         columnName: 'Volume',
         columnType: 'number',
         columnId: 'var_col_2',
         columnIndex: 2,
-        columnUnits: "Litres",
+        columnUnits: 'Litres',
     },
     {
         columnName: 'Column Name',
         columnType: 'function',
         columnId: `fx_col_3`,
         columnIndex: 3,
-        columnUnits: "units",
+        columnUnits: 'units',
         columnFunction: {
             colIndex1: 1,
             colIndex2: 2,
-            operator: "*"
-        }
-    }
+            operator: '*',
+        },
+    },
 ];
 
 // declare the initial state for the slice
@@ -86,20 +86,30 @@ export const opviaTableSlice = createSlice({
                 columnType: 'function',
                 columnId: `fx_col_${state.columns.length}`,
                 columnIndex: state.columns.length,
-                columnUnits: "units",
+                columnUnits: 'units',
                 columnFunction: {
                     colIndex1: 1,
                     colIndex2: 2,
-                    operator: "/"
-                }
+                    operator: '/',
+                },
             });
         },
-        updateColumnFunction: (state, {payload}: PayloadAction<{columnIndex: number, columnFunction: ColumnFunction}>) => {
-            const col = state.columns.find(col => col.columnIndex === payload.columnIndex)
+        updateColumnFunction: (
+            state,
+            {
+                payload,
+            }: PayloadAction<{
+                columnIndex: number;
+                columnFunction: ColumnFunction;
+            }>,
+        ) => {
+            const col = state.columns.find(
+                (col) => col.columnIndex === payload.columnIndex,
+            );
             if (col) {
-                col.columnFunction = payload.columnFunction
+                col.columnFunction = payload.columnFunction;
             }
-        }
+        },
     },
 });
 
