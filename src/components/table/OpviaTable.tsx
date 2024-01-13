@@ -1,32 +1,85 @@
 import * as React from 'react';
 
-import { Cell, Column, ColumnProps, Table2 } from '@blueprintjs/table';
+import {
+    Cell,
+    CellRenderer,
+    Column,
+    ColumnProps,
+    Table2,
+} from '@blueprintjs/table';
 import { dummyTableData } from '../../data/dummyData';
-import { OpviaTableColumn } from '../../redux/opviaTableSlice';
+import {
+    ColumnFunction,
+    ColumnType,
+    OpviaTableColumn,
+} from '../../redux/opviaTableSlice';
+import { useAppSelector } from '../../redux/store';
 
 export interface OpviaTableProps {
     columns: OpviaTableColumn[];
 }
 
 const OpviaTable: React.FC<OpviaTableProps> = ({ columns }) => {
-    const getSparseRefFromIndexes = (
+    const { data } = useAppSelector((state) => state.opviaTable);
+
+    const emptyCellRenderer: CellRenderer = (
         rowIndex: number,
         columnIndex: number,
-    ): string => `${columnIndex}-${rowIndex}`;
+    ) => {
+        return <Cell>{''}</Cell>;
+    };
 
-    const cellRenderer = (rowIndex: number, columnIndex: number) => {
-        const sparsePosition = getSparseRefFromIndexes(rowIndex, columnIndex);
-        const value = dummyTableData[sparsePosition];
+    const dataCellRenderer: CellRenderer = (
+        rowIndex: number,
+        columnIndex: number,
+    ) => {
+        const value = data[columnIndex][rowIndex];
         return <Cell>{String(value)}</Cell>;
     };
 
-    const cols = columns.map((column) => (
-        <Column
-            key={`${column.columnId}`}
-            cellRenderer={cellRenderer}
-            name={column.columnName}
-        />
-    ));
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const getFunctionCellRenderer = (columnFunction: ColumnFunction) => {
+        const functionCellRenderer: CellRenderer = (
+            rowIndex: number,
+            columnIndex: number,
+        ) => {
+            const value = data[columnIndex][rowIndex];
+            return <Cell>{String(value)}</Cell>;
+        };
+
+        return functionCellRenderer;
+    };
+
+    const getCellRenderer = (
+        columnType: ColumnType,
+        columnFunction?: ColumnFunction,
+    ) => {
+        switch (columnType) {
+            case 'function':
+                return getFunctionCellRenderer(columnFunction);
+            case 'number':
+                return dataCellRenderer;
+            case 'string':
+                return dataCellRenderer;
+            case 'time':
+                return dataCellRenderer;
+            default:
+                return emptyCellRenderer;
+        }
+    };
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const cols = columns.map((column) => {
+        return (
+            <Column
+                key={`${column.columnId}`}
+                cellRenderer={getCellRenderer(column.columnType)}
+                name={column.columnName}
+            />
+        );
+    });
 
     return (
         <Table2
