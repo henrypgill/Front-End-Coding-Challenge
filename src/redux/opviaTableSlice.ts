@@ -17,6 +17,8 @@ export interface OpviaTableColumn {
     columnType: ColumnType;
     columnId: string;
     columnFunction?: ColumnFunction;
+    columnUnits: string;
+    columnIndex: number;
 }
 
 // define an interface for the state of the OpviaTable
@@ -27,16 +29,26 @@ export interface OpviaTableState {
 
 // declare the initial state of the columns for the table
 const defaultColumns: OpviaTableColumn[] = [
-    { columnName: 'Time', columnType: 'time', columnId: 'time_col' },
     {
-        columnName: 'Cell Density (Cell Count/Litre)',
+        columnName: 'Time',
+        columnType: 'time',
+        columnId: 'time_col' ,
+        columnIndex: 0,
+        columnUnits: "seconds",
+},
+    {
+        columnName: 'Cell Density',
         columnType: 'number',
         columnId: 'var_col_1',
+        columnIndex: 1,
+        columnUnits: "Cell Count/Litre",
     },
     {
-        columnName: 'Volume (Litres)',
+        columnName: 'Volume',
         columnType: 'number',
         columnId: 'var_col_2',
+        columnIndex: 2,
+        columnUnits: "Litres",
     },
 ];
 
@@ -56,6 +68,8 @@ export const opviaTableSlice = createSlice({
                 columnName: 'Column Name',
                 columnType: 'function',
                 columnId: `fx_col_${state.columns.length}`,
+                columnIndex: state.columns.length,
+                columnUnits: "units",
             });
         },
     },
