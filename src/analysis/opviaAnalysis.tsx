@@ -97,7 +97,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                 <Icon icon={getAggregateIcon(aggregate.type)} size={20} />
             </div>
             <div>
-                <h2>{`${aggregate.type} ${column.columnName}`}</h2>
+                <h2>{`${aggregate.type} ${column.columnName}`.toLowerCase()}</h2>
                 <h3>{aggregate.value}</h3>
             </div>
         </Card>
