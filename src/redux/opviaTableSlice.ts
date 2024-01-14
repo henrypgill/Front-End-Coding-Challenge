@@ -110,6 +110,24 @@ export const opviaTableSlice = createSlice({
                 col.columnFunction = payload.columnFunction;
             }
         },
+        updateColumnNameAndUnits: (
+            state,
+            {
+                payload,
+            }: PayloadAction<
+                Pick<OpviaTableColumn, 'columnName' | 'columnUnits'> & {
+                    columnIndex: number;
+                }
+            >,
+        ) => {
+            const col = state.columns.find(
+                (col) => col.columnIndex === payload.columnIndex,
+            );
+            if (col) {
+                col.columnName = payload.columnName;
+                col.columnUnits = payload.columnUnits;
+            }
+        },
     },
 });
 
