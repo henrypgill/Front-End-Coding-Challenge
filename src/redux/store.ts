@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import opviaTableReducer from './opviaTableSlice';
+import opviaAnalysisReducer from './opviaAnalysisSlice';
 
 // export a type that represents the data structure of the store
 export type RootState = ReturnType<typeof store.getState>;
@@ -10,6 +11,7 @@ type AppDispatch = typeof store.dispatch;
 const store = configureStore({
     reducer: {
         opviaTable: opviaTableReducer,
+        opviaAnalysis: opviaAnalysisReducer,
     },
 });
 export default store;
