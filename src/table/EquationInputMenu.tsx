@@ -2,7 +2,7 @@ import { Button, ControlGroup, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
 import * as React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
-import { useAppDispatch } from '../redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import {
     ColumnFunction,
     ColumnFunctionOperator,
@@ -76,6 +76,7 @@ type ColumnFunctionUpdateInput =
 
 const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     const dispatch = useAppDispatch();
+    const columns = useAppSelector((state) => state.table.columns);
 
     const updateColumnFunction = ({
         columnFunctionKey,
@@ -98,10 +99,17 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
         );
     };
 
+    const filterColIndexes = columns
+        .filter((col) => col.columnType !== 'number')
+        .map((col) => col.columnIndex);
+
     return (
         <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
             <TableColumnSelect
-                exclusionColumnIndexes={[column.columnIndex]}
+                exclusionColumnIndexes={[
+                    ...filterColIndexes,
+                    column.columnIndex,
+                ]}
                 selectedColumnIndex={column.columnFunction!.colIndex1}
                 onItemSelect={(item) =>
                     updateColumnFunction({
@@ -120,7 +128,10 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
                 }
             />
             <TableColumnSelect
-                exclusionColumnIndexes={[column.columnIndex]}
+                exclusionColumnIndexes={[
+                    ...filterColIndexes,
+                    column.columnIndex,
+                ]}
                 selectedColumnIndex={column.columnFunction!.colIndex2}
                 onItemSelect={(item) =>
                     updateColumnFunction({
