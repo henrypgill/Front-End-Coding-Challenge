@@ -6,7 +6,7 @@ import {
     CellRenderer,
     Column,
     ColumnHeaderCell2,
-    Table2
+    Table2,
 } from '@blueprintjs/table';
 import { performCalculation } from '../../core/performCalculation';
 import { ColumnType, OpviaTableColumn } from '../../redux/opviaTableSlice';
@@ -31,7 +31,6 @@ const OpviaTable: React.FC = () => {
         const value = data[columnIndex][rowIndex];
         return <Cell>{String(value)}</Cell>;
     };
-    
 
     const getFunctionCellRenderer = (column: OpviaTableColumn) => {
         const functionCellRenderer: CellRenderer = (
@@ -140,7 +139,6 @@ const OpviaTable: React.FC = () => {
                 return dataColumnHeaderCellRenderer;
         }
     };
-
 
     const cols = columns.map((column) => {
         return (
