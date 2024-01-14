@@ -3,9 +3,9 @@ import { AggregateType } from '../redux/analysisSlice';
 const getAggregateIcon = (aggregateType: AggregateType) => {
     switch (aggregateType) {
         case 'maximum':
-            return 'add';
+            return 'arrow-top-right';
         case 'minimum':
-            return 'minus';
+            return 'arrow-bottom-left';
     }
 };
 
