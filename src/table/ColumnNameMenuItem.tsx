@@ -1,7 +1,7 @@
 import { Button, ControlGroup, InputGroup } from '@blueprintjs/core';
 import * as React from 'react';
-import { OpviaTableColumn, tableActions } from '../redux/tableSlice';
 import { useAppDispatch } from '../redux/store';
+import { OpviaTableColumn, tableActions } from '../redux/tableSlice';
 
 interface ColumnNameMenuItemProps {
     column: OpviaTableColumn;

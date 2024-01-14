@@ -1,5 +1,5 @@
 import { AggregateType } from '../redux/analysisSlice';
-import { TableColumn, TableNumberColumn } from '../redux/tableSlice';
+import { TableColumn } from '../redux/tableSlice';
 
 const getAggregateValue = (
     columnData: TableColumn,

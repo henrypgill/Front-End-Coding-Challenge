@@ -1,24 +1,20 @@
 import {
     Button,
     Card,
-    CardList,
-    ControlGroup,
     Icon,
-    Section,
-    SectionCard,
+    Section
 } from '@blueprintjs/core';
 import * as React from 'react';
+import TableColumnSelect from '../components/TableColumnSelect';
 import {
     Aggregate,
-    AggregateType,
     AggregateUpdate,
-    analysisActions,
+    analysisActions
 } from '../redux/analysisSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-import getAggregateIcon from './getAggregateIcon';
-import TableColumnSelect from '../components/TableColumnSelect';
-import getAggregateValue from './getAggregateValue';
 import AggregateTypeSelect from './AggregateTypeSelect';
+import getAggregateIcon from './getAggregateIcon';
+import getAggregateValue from './getAggregateValue';
 
 interface AggregateCardProps {
     aggregate: Aggregate;

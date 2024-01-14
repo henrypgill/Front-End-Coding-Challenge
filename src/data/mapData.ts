@@ -3,8 +3,6 @@ import { TableData } from '../redux/tableSlice';
 export function mapData(dataSet: { [key: string]: string | number }) {
     const mappedData: TableData = {};
 
-    const getSparsePosition = (sparsePosition: string) => {};
-
     for (let itemKey in dataSet) {
         const [column, row] = itemKey.split('-');
         if (!mappedData[column]) {
