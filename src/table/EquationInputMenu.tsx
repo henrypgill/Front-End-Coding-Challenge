@@ -1,8 +1,4 @@
-import {
-    Button,
-    ControlGroup,
-    MenuItem
-} from '@blueprintjs/core';
+import { Button, ControlGroup, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
 import * as React from 'react';
 import {
@@ -12,7 +8,7 @@ import {
     tableActions,
 } from '../redux/tableSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-import TableColumnSelect from '../components/OpviaColumnSelect';
+import TableColumnSelect from '../components/TableColumnSelect';
 
 interface TableOperatorSelectProps {
     selectedOperator: ColumnFunctionOperator;

@@ -69,9 +69,9 @@ const OpviaTable: React.FC = () => {
 
     const columnNameRenderer = (column: OpviaTableColumn) => {
         return (
-            <EntityTitle 
-            title={column.columnName}
-            subtitle={column.columnUnits}
+            <EntityTitle
+                title={column.columnName}
+                subtitle={column.columnUnits}
             />
         );
     };

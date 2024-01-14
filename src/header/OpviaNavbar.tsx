@@ -1,4 +1,10 @@
-import { Alignment, Button, ButtonGroup, InputGroup, Navbar } from '@blueprintjs/core';
+import {
+    Alignment,
+    Button,
+    ButtonGroup,
+    InputGroup,
+    Navbar,
+} from '@blueprintjs/core';
 import AnalyseActionsMenu from './AnalyseActionsMenu';
 import ColumnActionsMenu from './ColumnActionsMenu';
 
