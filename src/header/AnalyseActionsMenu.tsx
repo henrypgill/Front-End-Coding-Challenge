@@ -4,10 +4,10 @@ import {
     MenuItem,
     Popover
 } from '@blueprintjs/core';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { analysisActions } from '../../redux/analysisSlice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { analysisActions } from '../redux/analysisSlice';
 import getAggregateValue from '../analysis/getAggregateValue';
-import { TableNumberColumn } from '../../redux/tableSlice';
+import { TableNumberColumn } from '../redux/tableSlice';
 
 
 const AnalyseActionsMenu: React.FC = () => {

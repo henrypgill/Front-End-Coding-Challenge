@@ -5,8 +5,8 @@ import {
     Popover
 } from '@blueprintjs/core';
 import * as React from 'react';
-import { tableActions } from '../../redux/tableSlice';
-import { useAppDispatch } from '../../redux/store';
+import { tableActions } from '../redux/tableSlice';
+import { useAppDispatch } from '../redux/store';
 
 const AddFxColumn: React.FC = () => {
     const dispatch = useAppDispatch();

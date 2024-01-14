@@ -7,8 +7,8 @@ import * as React from 'react';
 import {
     OpviaTableColumn,
     tableActions
-} from '../../redux/tableSlice';
-import { useAppDispatch } from '../../redux/store';
+} from '../redux/tableSlice';
+import { useAppDispatch } from '../redux/store';
 
 interface ColumnNameMenuItemProps {
     column: OpviaTableColumn;

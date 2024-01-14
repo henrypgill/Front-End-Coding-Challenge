@@ -17,12 +17,6 @@ export interface OpviaAnalysisState {
 // declare the initial state for the slice
 const initialState: OpviaAnalysisState = {
     aggregates: [
-        {
-            type: "maximum",
-            columnIndex: 1,
-            value: 0,
-            aggregateId: "agg_max_0"
-        }
     ],
 };
 

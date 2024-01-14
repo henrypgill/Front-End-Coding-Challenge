@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from './store';
 import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
 

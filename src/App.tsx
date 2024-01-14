@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import OpviaAnalysis from './components/analysis/opviaAnalysis';
-import OpviaNavbar from './components/header/OpviaNavbar';
-import OpviaTable from './components/table/OpviaTable';
+import OpviaAnalysis from './analysis/opviaAnalysis';
+import OpviaNavbar from './header/OpviaNavbar';
+import OpviaTable from './table/OpviaTable';
 
 const App: React.FC = () => {
     return (

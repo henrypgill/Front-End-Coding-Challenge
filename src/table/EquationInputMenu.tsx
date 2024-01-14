@@ -10,8 +10,8 @@ import {
     ColumnFunctionOperator,
     OpviaTableColumn,
     tableActions,
-} from '../../redux/tableSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+} from '../redux/tableSlice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 
 interface TableColumnSelectProps {
     colIndex: number;

@@ -8,9 +8,9 @@ import {
     ColumnHeaderCell2,
     Table2,
 } from '@blueprintjs/table';
-import { performCalculation } from '../../core/performCalculation';
-import { ColumnType, OpviaTableColumn } from '../../redux/tableSlice';
-import { useAppSelector } from '../../redux/store';
+import { performCalculation } from '../core/performCalculation';
+import { useAppSelector } from '../redux/store';
+import { ColumnType, OpviaTableColumn } from '../redux/tableSlice';
 import ColumnNameMenuItem from './ColumnNameMenuItem';
 import EquationInputMenu from './EquationInputMenu';
 
