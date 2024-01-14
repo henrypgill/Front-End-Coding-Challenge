@@ -1,22 +1,27 @@
 import { AggregateType } from '../redux/analysisSlice';
-import { TableNumberColumn } from '../redux/tableSlice';
+import { TableColumn, TableNumberColumn } from '../redux/tableSlice';
 
 const getAggregateValue = (
-    columnData: TableNumberColumn,
+    columnData: TableColumn,
     type: AggregateType,
-): number => {
+): number | "NaN"=> {
+    
     const data: number[] = [];
     for (let row in columnData) {
-        data.push(columnData[row]);
+        data.push(columnData[row] as number);
     }
+    try {
 
-    switch (type) {
-        case 'maximum':
-            return Math.max(...data);
-        case 'minimum':
-            return Math.min(...data);
-        default:
-            return 0;
+        switch (type) {
+            case 'maximum':
+                return Math.max(...data);
+                case 'minimum':
+                    return Math.min(...data);
+                    default:
+                        return 0;
+                    }
+    } catch (error) {
+        return "NaN"
     }
 };
 
