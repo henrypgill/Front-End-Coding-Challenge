@@ -156,7 +156,6 @@ const OpviaTable: React.FC = () => {
             defaultRowHeight={35}
             numRows={95}
             enableFocusedCell={true}
-            enableColumnReordering={true}
             cellRendererDependencies={[data, columns]}
         >
             {cols}
