@@ -3,6 +3,7 @@ import { TableNumberColumn } from "../redux/tableSlice";
 
 
 
+const getAggregateValue = (columnData: TableNumberColumn, type: AggregateType): number => {
 
     const data: number[] = []
     for (let row in columnData) {
@@ -14,6 +15,8 @@ import { TableNumberColumn } from "../redux/tableSlice";
             return Math.max(...data);
         case "minimum":
             return Math.min(...data);
+        default:
+            return 0;
     }
 
 }
