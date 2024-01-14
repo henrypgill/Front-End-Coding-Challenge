@@ -6,7 +6,8 @@ export type AggregateType = "maximum" | "minimum"
 export interface Aggregate {
     type: AggregateType;
     columnIndex: number;
-    value: string | number
+    value: string | number;
+    aggregateId: string;
 }
 export interface OpviaAnalysisState {
     aggregates: Aggregate[];
@@ -20,6 +21,7 @@ const initialState: OpviaAnalysisState = {
             type: "maximum",
             columnIndex: 1,
             value: 0,
+            aggregateId: "agg_max_0"
         }
     ],
 };
@@ -30,7 +32,7 @@ export const analysisSlice = createSlice({
     initialState,
     reducers: {
         addAggregate: (state, {payload}: PayloadAction<Aggregate> ) => {
-            state.aggregates.push(payload)
+            state.aggregates.push({...payload, aggregateId: `agg_max_${state.aggregates.length}`})
         }
     },
 });
