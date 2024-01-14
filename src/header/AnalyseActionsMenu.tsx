@@ -36,12 +36,12 @@ const AnalyseActionsMenu: React.FC = () => {
     const columnMenu = (
         <Menu>
             <MenuItem
-                icon="add"
+                icon="arrow-top-right"
                 onClick={() => addMaximumAggregate()}
                 text="Maximum"
             />
             <MenuItem
-                icon="minus"
+                icon="arrow-bottom-left"
                 onClick={() => addMinimumAggregate()}
                 text="Minimum"
             />
