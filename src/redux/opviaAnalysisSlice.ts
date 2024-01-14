@@ -15,7 +15,13 @@ export interface OpviaAnalysisState {
 
 // declare the initial state for the slice
 const initialState: OpviaAnalysisState = {
-    aggregates: [],
+    aggregates: [
+        {
+            type: "maximum",
+            columnIndex: 1,
+            value: 0,
+        }
+    ],
 };
 
 // create the redux slice
