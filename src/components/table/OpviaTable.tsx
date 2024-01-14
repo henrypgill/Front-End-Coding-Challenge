@@ -109,10 +109,24 @@ const OpviaTable: React.FC = () => {
     };
 
     const dataColumnHeaderCellRenderer = (colIndex: number) => {
-        const column = columns.filter((col) => col.columnIndex === colIndex)[0];
+        const column = columns.find((col) => col.columnIndex === colIndex)!;
+
+        const menuRenderer = () => {
+            return (
+                <Menu style={{ padding: 8 }}>
+                    <div>
+                        <strong>Settings</strong>
+                    </div>
+                    <Divider />
+                    <ColumnNameMenuItem column={column} />
+                </Menu>
+            );
+        };
         return (
             <ColumnHeaderCell2
                 nameRenderer={() => columnNameRenderer(column)}
+                menuIcon={'menu'}
+                menuRenderer={menuRenderer}
             ></ColumnHeaderCell2>
         );
     };
