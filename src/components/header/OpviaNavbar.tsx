@@ -1,5 +1,6 @@
 import { Alignment, Button, ButtonGroup, InputGroup, Navbar } from '@blueprintjs/core';
 import ColumnActionsMenu from './ColumnActionsMenu';
+import AnalyseActionsMenu from './AnalyseActionsMenu';
 
 const OpviaNavbar: React.FC = () => {
     return (
@@ -10,6 +11,7 @@ const OpviaNavbar: React.FC = () => {
                     <Navbar.Divider />
                     <ButtonGroup minimal={true}>
                         <ColumnActionsMenu />
+                        <AnalyseActionsMenu />
                     </ButtonGroup>
                 </Navbar.Group>
                 <Navbar.Group align={Alignment.RIGHT}>
