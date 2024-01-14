@@ -1,10 +1,10 @@
-import { MenuItem, Button } from "@blueprintjs/core";
-import { Select, ItemRenderer } from "@blueprintjs/select";
-import { useAppSelector } from "../redux/store";
-import { OpviaTableColumn } from "../redux/tableSlice";
+import { MenuItem, Button } from '@blueprintjs/core';
+import { Select, ItemRenderer } from '@blueprintjs/select';
+import { useAppSelector } from '../redux/store';
+import { OpviaTableColumn } from '../redux/tableSlice';
 
 interface TableColumnSelectProps {
-    colIndex: number;
+    colIndex?: number;
     selectedColumnIndex: number;
     onItemSelect: (
         item: OpviaTableColumn,
@@ -52,4 +52,4 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
     );
 };
 
-export default TableColumnSelect
+export default TableColumnSelect;
