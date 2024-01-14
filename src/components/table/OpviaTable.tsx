@@ -1,15 +1,17 @@
 import * as React from 'react';
 
+import { Divider, Menu } from '@blueprintjs/core';
 import {
     Cell,
     CellRenderer,
     Column,
     ColumnHeaderCell2,
-    Table2,
+    Table2
 } from '@blueprintjs/table';
 import { performCalculation } from '../../core/performCalculation';
 import { ColumnType, OpviaTableColumn } from '../../redux/opviaTableSlice';
 import { useAppSelector } from '../../redux/store';
+import ColumnNameMenuItem from './ColumnNameMenuItem';
 import EquationInputMenu from './EquationInputMenu';
 
 const OpviaTable: React.FC = () => {
@@ -29,8 +31,7 @@ const OpviaTable: React.FC = () => {
         const value = data[columnIndex][rowIndex];
         return <Cell>{String(value)}</Cell>;
     };
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
     const getFunctionCellRenderer = (column: OpviaTableColumn) => {
         const functionCellRenderer: CellRenderer = (
