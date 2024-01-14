@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Divider, Menu } from '@blueprintjs/core';
+import { Divider, EntityTitle, Menu } from '@blueprintjs/core';
 import {
     Cell,
     CellRenderer,
@@ -9,13 +9,13 @@ import {
     Table2,
 } from '@blueprintjs/table';
 import { performCalculation } from '../../core/performCalculation';
-import { ColumnType, OpviaTableColumn } from '../../redux/opviaTableSlice';
+import { ColumnType, OpviaTableColumn } from '../../redux/tableSlice';
 import { useAppSelector } from '../../redux/store';
 import ColumnNameMenuItem from './ColumnNameMenuItem';
 import EquationInputMenu from './EquationInputMenu';
 
 const OpviaTable: React.FC = () => {
-    const { data, columns } = useAppSelector((state) => state.opviaTable);
+    const { data, columns } = useAppSelector((state) => state.table);
 
     const emptyCellRenderer: CellRenderer = (
         rowIndex: number,
@@ -69,12 +69,10 @@ const OpviaTable: React.FC = () => {
 
     const columnNameRenderer = (column: OpviaTableColumn) => {
         return (
-            <div>
-                <div>
-                    <strong>{column.columnName}</strong>
-                </div>
-                <div>{column.columnUnits}</div>
-            </div>
+            <EntityTitle 
+            title={column.columnName}
+            subtitle={column.columnUnits}
+            />
         );
     };
 

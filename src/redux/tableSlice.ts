@@ -76,8 +76,8 @@ const initialState: OpviaTableState = {
 };
 
 // create the redux slice
-export const opviaTableSlice = createSlice({
-    name: 'opviaTable',
+export const tableSlice = createSlice({
+    name: 'table',
     initialState,
     reducers: {
         addFxColumn: (state) => {
@@ -132,6 +132,6 @@ export const opviaTableSlice = createSlice({
 });
 
 // export the slice's reducer
-export default opviaTableSlice.reducer;
+export default tableSlice.reducer;
 //export the slices actions for ease of use in components
-export const opviaTableActions = opviaTableSlice.actions;
+export const tableActions = tableSlice.actions;

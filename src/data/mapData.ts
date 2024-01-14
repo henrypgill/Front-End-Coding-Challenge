@@ -1,4 +1,4 @@
-import { TableData } from '../redux/opviaTableSlice';
+import { TableData } from '../redux/tableSlice';
 
 export function mapData(dataSet: { [key: string]: string | number }) {
     const mappedData: TableData = {};

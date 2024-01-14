@@ -9,8 +9,8 @@ import {
     ColumnFunction,
     ColumnFunctionOperator,
     OpviaTableColumn,
-    opviaTableActions,
-} from '../../redux/opviaTableSlice';
+    tableActions,
+} from '../../redux/tableSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 interface TableColumnSelectProps {
@@ -27,7 +27,7 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
     selectedColumnIndex,
     onItemSelect,
 }) => {
-    const { columns } = useAppSelector((state) => state.opviaTable);
+    const { columns } = useAppSelector((state) => state.table);
     const columnOptions = columns.filter((col) => col.columnIndex !== colIndex);
     const selectedColumn = columns.find(
         (col) => col.columnIndex === selectedColumnIndex,
@@ -127,7 +127,6 @@ type ColumnFunctionUpdateInput =
     | ColumnFunctionOperatorUpdate;
 
 const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
-    const { columns } = useAppSelector((state) => state.opviaTable);
     const dispatch = useAppDispatch();
 
     const updateColumnFunction = ({
@@ -144,7 +143,7 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
         }
 
         dispatch(
-            opviaTableActions.updateColumnFunction({
+            tableActions.updateColumnFunction({
                 columnIndex: column.columnIndex,
                 columnFunction,
             }),

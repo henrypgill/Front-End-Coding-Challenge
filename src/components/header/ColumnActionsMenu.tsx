@@ -5,12 +5,11 @@ import {
     Popover
 } from '@blueprintjs/core';
 import * as React from 'react';
-import { opviaTableActions } from '../../redux/opviaTableSlice';
+import { tableActions } from '../../redux/tableSlice';
 import { useAppDispatch } from '../../redux/store';
 
 const AddFxColumn: React.FC = () => {
     const dispatch = useAppDispatch();
-    const tableActions = opviaTableActions;
 
     const addFxColumnHandler = () => {
         dispatch(tableActions.addFxColumn());

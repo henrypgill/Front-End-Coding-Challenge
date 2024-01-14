@@ -1,4 +1,4 @@
-import { ColumnFunctionOperator } from '../redux/opviaTableSlice';
+import { ColumnFunctionOperator } from '../redux/tableSlice';
 
 export function performCalculation(
     num1: number,

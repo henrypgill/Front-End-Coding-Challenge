@@ -6,8 +6,8 @@ import {
 import * as React from 'react';
 import {
     OpviaTableColumn,
-    opviaTableActions
-} from '../../redux/opviaTableSlice';
+    tableActions
+} from '../../redux/tableSlice';
 import { useAppDispatch } from '../../redux/store';
 
 interface ColumnNameMenuItemProps {
@@ -21,7 +21,7 @@ const ColumnNameMenuItem: React.FC<ColumnNameMenuItemProps> = ({ column }) => {
 
     const updateColumnNameAndUnits = () => {
         dispatch(
-            opviaTableActions.updateColumnNameAndUnits({
+            tableActions.updateColumnNameAndUnits({
                 columnIndex: column.columnIndex,
                 columnName: name,
                 columnUnits: units,
