@@ -4,8 +4,9 @@ import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
 
 // define the type for the data containing object that is passed to the table
+export type TableColumn = { [key: string]: string | number }
 export type TableData = {
-    [key: string]: { [key: string]: string | number };
+    [key: string]: TableColumn;
 };
 
 // define types and an interface that represents a column to be rendered in the table
