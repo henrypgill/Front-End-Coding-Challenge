@@ -1,41 +1,50 @@
-import {
-    Button,
-    Menu,
-    MenuItem,
-    Popover
-} from '@blueprintjs/core';
+import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { analysisActions } from '../redux/analysisSlice';
 import getAggregateValue from '../analysis/getAggregateValue';
 import { TableNumberColumn } from '../redux/tableSlice';
 
-
 const AnalyseActionsMenu: React.FC = () => {
     const dispatch = useAppDispatch();
-    const data = useAppSelector(state => state.table.data)
+    const data = useAppSelector((state) => state.table.data);
 
     const addMaximumAggregate = () => {
-        dispatch(analysisActions.addAggregate({
-            type: "maximum",
-            columnIndex: 1,
-            value: getAggregateValue(data[1] as TableNumberColumn, "maximum")
-
-        }))
-    }
+        dispatch(
+            analysisActions.addAggregate({
+                type: 'maximum',
+                columnIndex: 1,
+                value: getAggregateValue(
+                    data[1] as TableNumberColumn,
+                    'maximum',
+                ),
+            }),
+        );
+    };
     const addMinimumAggregate = () => {
-        dispatch(analysisActions.addAggregate({
-            type: "minimum",
-            columnIndex: 1,
-            value: getAggregateValue(data[1] as TableNumberColumn, "minimum")
-
-        }))
-    }
-
+        dispatch(
+            analysisActions.addAggregate({
+                type: 'minimum',
+                columnIndex: 1,
+                value: getAggregateValue(
+                    data[1] as TableNumberColumn,
+                    'minimum',
+                ),
+            }),
+        );
+    };
 
     const columnMenu = (
         <Menu>
-            <MenuItem icon="add" onClick={() => addMaximumAggregate()} text="Maximum" />
-            <MenuItem icon="minus" onClick={() => addMinimumAggregate()} text="Minimum" />
+            <MenuItem
+                icon="add"
+                onClick={() => addMaximumAggregate()}
+                text="Maximum"
+            />
+            <MenuItem
+                icon="minus"
+                onClick={() => addMinimumAggregate()}
+                text="Minimum"
+            />
         </Menu>
     );
 
