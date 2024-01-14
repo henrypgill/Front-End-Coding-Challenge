@@ -82,7 +82,21 @@ const OpviaTable: React.FC = () => {
         const column = columns.find((col) => col.columnIndex === colIndex)!;
 
         const menuRenderer = () => {
-            return <EquationInputMenu column={column} />;
+            return (
+                <Menu style={{ padding: 8 }}>
+                    <div>
+                        <strong>Settings</strong>
+                    </div>
+                    <Divider />
+                    <ColumnNameMenuItem column={column} />
+
+                    <div>
+                        <strong>Equation</strong>
+                    </div>
+                    <Divider />
+                    <EquationInputMenu column={column} />
+                </Menu>
+            );
         };
 
         return (

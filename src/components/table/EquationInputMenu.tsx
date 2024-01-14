@@ -158,43 +158,37 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     };
 
     return (
-        <Menu style={{padding: 8}}>
-            <div>
-                <strong>Equation</strong>
-            </div>
-            <Divider />
-            <ControlGroup fill={true} vertical={false} style={{padding: 8}}>
-                <TableColumnSelect
-                    colIndex={column.columnIndex}
-                    selectedColumnIndex={column.columnFunction!.colIndex1}
-                    onItemSelect={(item) =>
-                        updateColumnFunction({
-                            columnFunctionKey: 'colIndex1',
-                            value: item.columnIndex,
-                        })
-                    }
-                />
-                <TableOperatorSelect
-                    selectedOperator={column.columnFunction!.operator}
-                    onItemSelect={(item) =>
-                        updateColumnFunction({
-                            columnFunctionKey: 'operator',
-                            value: item,
-                        })
-                    }
-                />
-                <TableColumnSelect
-                    colIndex={column.columnIndex}
-                    selectedColumnIndex={column.columnFunction!.colIndex2}
-                    onItemSelect={(item) =>
-                        updateColumnFunction({
-                            columnFunctionKey: 'colIndex2',
-                            value: item.columnIndex,
-                        })
-                    }
-                />
-            </ControlGroup>
-        </Menu>
+        <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
+            <TableColumnSelect
+                colIndex={column.columnIndex}
+                selectedColumnIndex={column.columnFunction!.colIndex1}
+                onItemSelect={(item) =>
+                    updateColumnFunction({
+                        columnFunctionKey: 'colIndex1',
+                        value: item.columnIndex,
+                    })
+                }
+            />
+            <TableOperatorSelect
+                selectedOperator={column.columnFunction!.operator}
+                onItemSelect={(item) =>
+                    updateColumnFunction({
+                        columnFunctionKey: 'operator',
+                        value: item,
+                    })
+                }
+            />
+            <TableColumnSelect
+                colIndex={column.columnIndex}
+                selectedColumnIndex={column.columnFunction!.colIndex2}
+                onItemSelect={(item) =>
+                    updateColumnFunction({
+                        columnFunctionKey: 'colIndex2',
+                        value: item.columnIndex,
+                    })
+                }
+            />
+        </ControlGroup>
     );
 };
 
