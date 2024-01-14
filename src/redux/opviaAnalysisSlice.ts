@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 
 // define an interface for the state of the OpviaAnalysis Slice
@@ -6,6 +6,7 @@ type AggregateType = "maximum" | "minimum"
 interface Aggregate {
     type: AggregateType;
     columnIndex: number;
+    value: string | number
 }
 export interface OpviaAnalysisState {
     aggregates: Aggregate[];
@@ -22,6 +23,9 @@ export const opviaAnalysisSlice = createSlice({
     name: 'analysis',
     initialState,
     reducers: {
+        addAggregate: (state, {payload}: PayloadAction<Aggregate> ) => {
+            state.aggregates.push(payload)
+        }
     },
 });
 
