@@ -1,10 +1,9 @@
 import { AggregateType } from "../../redux/analysisSlice";
+import { TableNumberColumn } from "../../redux/tableSlice";
 
 
 
-const getAggregateValue = (columnData: {
-    [key: string]:  number;
-}, type: AggregateType) => {
+const getAggregateValue = (columnData: TableNumberColumn, type: AggregateType) => {
 
     const data: number[] = []
     for (let row in columnData) {
