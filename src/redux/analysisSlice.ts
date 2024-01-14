@@ -31,7 +31,7 @@ export const analysisSlice = createSlice({
     name: 'analysis',
     initialState,
     reducers: {
-        addAggregate: (state, {payload}: PayloadAction<Aggregate> ) => {
+        addAggregate: (state, {payload}: PayloadAction<Omit<Aggregate, "aggregateId">> ) => {
             state.aggregates.push({...payload, aggregateId: `agg_max_${state.aggregates.length}`})
         }
     },
