@@ -4,6 +4,30 @@ import { Aggregate } from "../../redux/analysisSlice";
 import { useAppSelector } from "../../redux/store";
 import getAggregateIcon from "./getAggregateIcon";
 
+interface AggregateCardProps {
+    aggregate: Aggregate
+}
+const AggregateCard: React.FC<AggregateCardProps> = ({aggregate}) => {
+
+    const table = useAppSelector(state => state.table)
+    const column = table.columns.find(col => col.columnIndex === aggregate.columnIndex)!
+
+
+    return (
+        <Card style={{flex: "row", gap: 8}}>
+            <div>
+                <Icon icon={getAggregateIcon(aggregate.type)} size={20}/>
+            </div>
+            <h2>
+                {`${aggregate.type} ${column.columnName}`}
+            </h2>
+        </Card>
+        
+    )
+}
+
+
+
 const Analysis = () => {
 
     const analysis = useAppSelector(state => state.analysis)
@@ -23,3 +47,4 @@ const Analysis = () => {
 
 }
 
+export default Analysis
