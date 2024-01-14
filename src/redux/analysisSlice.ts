@@ -2,8 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 
 // define an interface for the state of the OpviaAnalysis Slice
-type AggregateType = "maximum" | "minimum"
-interface Aggregate {
+export type AggregateType = "maximum" | "minimum"
+export interface Aggregate {
     type: AggregateType;
     columnIndex: number;
     value: string | number
@@ -25,7 +25,7 @@ const initialState: OpviaAnalysisState = {
 };
 
 // create the redux slice
-export const opviaAnalysisSlice = createSlice({
+export const analysisSlice = createSlice({
     name: 'analysis',
     initialState,
     reducers: {
@@ -36,6 +36,6 @@ export const opviaAnalysisSlice = createSlice({
 });
 
 // export the slice's reducer
-export default opviaAnalysisSlice.reducer;
+export default analysisSlice.reducer;
 //export the slices actions for ease of use in components
-export const opviaAnalysisActions = opviaAnalysisSlice.actions;
+export const analysisActions = analysisSlice.actions;
