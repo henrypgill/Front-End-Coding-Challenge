@@ -14,10 +14,8 @@ export interface OpviaAnalysisState {
 
 // declare the initial state for the slice
 const initialState: OpviaAnalysisState = {
-    aggregates: [
-    ],
+    aggregates: [],
 };
-
 
 export interface AggregateColumnUpdate {
     key: 'columnIndex';
@@ -45,13 +43,13 @@ export const analysisSlice = createSlice({
                 aggregateId: `agg_max_${state.aggregates.length}`,
             });
         },
-        updateAggregate: (
-            state, {payload}: PayloadAction<Aggregate>,
-        ) => {
+        updateAggregate: (state, { payload }: PayloadAction<Aggregate>) => {
             return {
                 ...state,
-                aggregates: state.aggregates.map(agg => agg.aggregateId === payload.aggregateId ? payload : agg)
-            }
+                aggregates: state.aggregates.map((agg) =>
+                    agg.aggregateId === payload.aggregateId ? payload : agg,
+                ),
+            };
         },
     },
 });

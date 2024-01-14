@@ -18,7 +18,9 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
     onItemSelect,
 }) => {
     const { columns } = useAppSelector((state) => state.table);
-    const columnOptions = columns.filter((col) => !exclusionColumnIndexes.includes(col.columnIndex));
+    const columnOptions = columns.filter(
+        (col) => !exclusionColumnIndexes.includes(col.columnIndex),
+    );
 
     const selectedColumn = columns.find(
         (col) => col.columnIndex === selectedColumnIndex,

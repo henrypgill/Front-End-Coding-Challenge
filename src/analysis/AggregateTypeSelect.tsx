@@ -3,7 +3,7 @@ import { ItemRenderer, Select } from '@blueprintjs/select';
 import { AggregateType } from '../redux/analysisSlice';
 
 interface AggregateTypeSelectProps {
-    currentType: AggregateType,
+    currentType: AggregateType;
     onItemSelect: (
         item: AggregateType,
         event?: React.SyntheticEvent<HTMLElement, Event> | undefined,
@@ -14,8 +14,7 @@ const AggregateTypeSelect: React.FC<AggregateTypeSelectProps> = ({
     currentType,
     onItemSelect,
 }) => {
-
-    const aggregateTypes: AggregateType[] = ["maximum", "minimum"]
+    const aggregateTypes: AggregateType[] = ['maximum', 'minimum'];
 
     const selectItemRenderer: ItemRenderer<AggregateType> = (
         type,
