@@ -112,7 +112,6 @@ const OpviaTable: React.FC = () => {
         }
     };
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const cols = columns.map((column) => {
         return (
@@ -133,6 +132,7 @@ const OpviaTable: React.FC = () => {
             numRows={95}
             enableFocusedCell={true}
             enableColumnReordering={true}
+            cellRendererDependencies={[data, columns]}
         >
             {cols}
         </Table2>
