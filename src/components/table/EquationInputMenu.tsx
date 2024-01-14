@@ -1,14 +1,10 @@
-import * as React from 'react';
 import {
     Button,
     ControlGroup,
-    Divider,
-    InputGroup,
-    Menu,
-    MenuItem,
-    Popover,
+    MenuItem
 } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
+import * as React from 'react';
 import {
     ColumnFunction,
     ColumnFunctionOperator,

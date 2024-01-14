@@ -1,22 +1,14 @@
-import * as React from 'react';
 import {
     Button,
-    Classes,
     ControlGroup,
-    Divider,
-    InputGroup,
-    Menu,
-    MenuItem,
-    Popover,
+    InputGroup
 } from '@blueprintjs/core';
-import { ItemRenderer, Select } from '@blueprintjs/select';
+import * as React from 'react';
 import {
-    ColumnFunction,
-    ColumnFunctionOperator,
     OpviaTableColumn,
-    opviaTableActions,
+    opviaTableActions
 } from '../../redux/opviaTableSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppDispatch } from '../../redux/store';
 
 interface ColumnNameMenuItemProps {
     column: OpviaTableColumn;

@@ -1,6 +1,6 @@
 import { Alignment, Button, ButtonGroup, InputGroup, Navbar } from '@blueprintjs/core';
-import ColumnActionsMenu from './ColumnActionsMenu';
 import AnalyseActionsMenu from './AnalyseActionsMenu';
+import ColumnActionsMenu from './ColumnActionsMenu';
 
 const OpviaNavbar: React.FC = () => {
     return (

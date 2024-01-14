@@ -1,15 +1,12 @@
 import {
     Button,
-    Card,
     Menu,
-    MenuDivider,
     MenuItem,
-    Popover,
+    Popover
 } from '@blueprintjs/core';
-import { useAppDispatch } from '../../redux/store';
-import { opviaTableActions } from '../../redux/opviaTableSlice';
 import * as React from 'react';
-import CreateFxColumnDialog from './CreateFxColumnDialog';
+import { opviaTableActions } from '../../redux/opviaTableSlice';
+import { useAppDispatch } from '../../redux/store';
 
 const AddFxColumn: React.FC = () => {
     const dispatch = useAppDispatch();
