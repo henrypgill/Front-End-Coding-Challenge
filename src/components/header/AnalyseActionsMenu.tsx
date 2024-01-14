@@ -1,32 +1,41 @@
 import {
     Button,
-    Card,
     Menu,
-    MenuDivider,
     MenuItem,
-    Popover,
+    Popover
 } from '@blueprintjs/core';
-import { useAppDispatch } from '../../redux/store';
-import { opviaTableActions } from '../../redux/opviaTableSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { analysisActions } from '../../redux/analysisSlice';
+import getAggregateValue from '../analysis/getAggregateValue';
+import { TableNumberColumn } from '../../redux/tableSlice';
+
 
 const AnalyseActionsMenu: React.FC = () => {
     const dispatch = useAppDispatch();
-    const tableActions = opviaTableActions;
+    const data = useAppSelector(state => state.table.data)
 
-    const addFunctionColumnHandler = () => {
-        dispatch(
-            tableActions.addColumn({
-                columnName: 'Name',
-                columnType: 'data',
-                columnId: 'var_col_3',
-            }),
-        );
-    };
+    const addMaximumAggregate = () => {
+        dispatch(analysisActions.addAggregate({
+            type: "maximum",
+            columnIndex: 1,
+            value: getAggregateValue(data[1] as TableNumberColumn, "maximum")
+
+        }))
+    }
+    const addMinimumAggregate = () => {
+        dispatch(analysisActions.addAggregate({
+            type: "minimum",
+            columnIndex: 1,
+            value: getAggregateValue(data[1] as TableNumberColumn, "minimum")
+
+        }))
+    }
+
 
     const columnMenu = (
         <Menu>
-            <MenuItem icon="add" onClick={() => null} text="Maximum" />
-            <MenuItem icon="minus" onClick={() => null} text="Minimum" />
+            <MenuItem icon="add" onClick={() => addMaximumAggregate()} text="Maximum" />
+            <MenuItem icon="minus" onClick={() => addMinimumAggregate()} text="Minimum" />
         </Menu>
     );
 
