@@ -31,7 +31,8 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
     selectedColumnIndex,
     onItemSelect,
 }) => {
-    const columns = useAppSelector((state) => state.opviaTable).columns.filter(
+    const {columns} = useAppSelector((state) => state.opviaTable)
+    const columnOptions = columns.filter(
         (col) => col.columnIndex !== colIndex,
     );
     const selectedColumn = columns.find(
@@ -55,11 +56,10 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
             />
         );
     };
-    console.log(selectedColumn);
 
     return (
         <Select<OpviaTableColumn>
-            items={columns}
+            items={columnOptions}
             onItemSelect={(item) => onItemSelect(item)}
             itemRenderer={selectItemRenderer}
         >
@@ -158,12 +158,12 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     };
 
     return (
-        <Menu>
+        <Menu style={{padding: 8}}>
             <div>
                 <strong>Equation</strong>
             </div>
             <Divider />
-            <ControlGroup fill={true} vertical={false}>
+            <ControlGroup fill={true} vertical={false} style={{padding: 8}}>
                 <TableColumnSelect
                     colIndex={column.columnIndex}
                     selectedColumnIndex={column.columnFunction!.colIndex1}
@@ -185,7 +185,7 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
                 />
                 <TableColumnSelect
                     colIndex={column.columnIndex}
-                    selectedColumnIndex={column.columnFunction!.colIndex1}
+                    selectedColumnIndex={column.columnFunction!.colIndex2}
                     onItemSelect={(item) =>
                         updateColumnFunction({
                             columnFunctionKey: 'colIndex2',
