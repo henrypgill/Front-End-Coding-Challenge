@@ -31,10 +31,8 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
     selectedColumnIndex,
     onItemSelect,
 }) => {
-    const {columns} = useAppSelector((state) => state.opviaTable)
-    const columnOptions = columns.filter(
-        (col) => col.columnIndex !== colIndex,
-    );
+    const { columns } = useAppSelector((state) => state.opviaTable);
+    const columnOptions = columns.filter((col) => col.columnIndex !== colIndex);
     const selectedColumn = columns.find(
         (col) => col.columnIndex === selectedColumnIndex,
     )!;
