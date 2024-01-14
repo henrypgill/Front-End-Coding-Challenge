@@ -13,14 +13,19 @@ const AggregateCard: React.FC<AggregateCardProps> = ({aggregate}) => {
     const column = table.columns.find(col => col.columnIndex === aggregate.columnIndex)!
 
 
+
     return (
-        <Card style={{flex: "row", gap: 8}}>
+        <Card style={{flexDirection: "column", gap: 8}}>
             <div>
                 <Icon icon={getAggregateIcon(aggregate.type)} size={20}/>
             </div>
-            <h2>
-                {`${aggregate.type} ${column.columnName}`}
-            </h2>
+            <div>
+
+                <h2>
+                    {`${aggregate.type} ${column.columnName}`}
+                </h2>
+                <h3>{aggregate.value}</h3>
+            </div>
         </Card>
         
     )
