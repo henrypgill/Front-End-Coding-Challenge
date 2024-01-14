@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import OpviaAnalysis from './components/analysis/opviaAnalysis';
 import OpviaNavbar from './components/header/OpviaNavbar';
-import TableGroup from './components/table/TableGroup';
+import OpviaTable from './components/table/OpviaTable';
 
 const App: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ const App: React.FC = () => {
                 <OpviaAnalysis />
             </div>
             <div style={{ padding: 0 }}>
-                <TableGroup />
+                <OpviaTable />
             </div>
         </div>
     );
