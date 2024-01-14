@@ -101,7 +101,7 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     return (
         <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
             <TableColumnSelect
-                colIndex={column.columnIndex}
+                exclusionColumnIndexes={[column.columnIndex]}
                 selectedColumnIndex={column.columnFunction!.colIndex1}
                 onItemSelect={(item) =>
                     updateColumnFunction({
@@ -120,7 +120,7 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
                 }
             />
             <TableColumnSelect
-                colIndex={column.columnIndex}
+                exclusionColumnIndexes={[column.columnIndex]}
                 selectedColumnIndex={column.columnFunction!.colIndex2}
                 onItemSelect={(item) =>
                     updateColumnFunction({

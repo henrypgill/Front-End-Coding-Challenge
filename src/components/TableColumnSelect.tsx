@@ -4,7 +4,7 @@ import { useAppSelector } from '../redux/store';
 import { OpviaTableColumn } from '../redux/tableSlice';
 
 interface TableColumnSelectProps {
-    colIndex?: number;
+    exclusionColumnIndexes: number[];
     selectedColumnIndex: number;
     onItemSelect: (
         item: OpviaTableColumn,
@@ -13,12 +13,13 @@ interface TableColumnSelectProps {
 }
 
 const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
-    colIndex,
+    exclusionColumnIndexes,
     selectedColumnIndex,
     onItemSelect,
 }) => {
     const { columns } = useAppSelector((state) => state.table);
-    const columnOptions = columns.filter((col) => col.columnIndex !== colIndex);
+    const columnOptions = columns.filter((col) => !exclusionColumnIndexes.includes(col.columnIndex));
+
     const selectedColumn = columns.find(
         (col) => col.columnIndex === selectedColumnIndex,
     )!;
