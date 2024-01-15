@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
+import { calculateColumnData } from '../core/performCalculation';
 
 // define the type for the data containing object that is passed to the table
-export type TableNumberColumn = { [key: string]: number };
-export type TableStringColumn = { [key: string]: string };
-export type TableColumn = TableNumberColumn | TableStringColumn;
+export type TableColumn = { [key: string]: string };
 export type TableData = {
     [key: string]: TableColumn;
 };
@@ -41,7 +40,7 @@ const defaultColumns: OpviaTableColumn[] = [
         columnType: 'time',
         columnId: 'time_col',
         columnIndex: 0,
-        columnUnits: 'seconds',
+        columnUnits: 'date and time',
     },
     {
         columnName: 'Cell Density',
@@ -56,18 +55,6 @@ const defaultColumns: OpviaTableColumn[] = [
         columnId: 'var_col_2',
         columnIndex: 2,
         columnUnits: 'Litres',
-    },
-    {
-        columnName: 'Column Name',
-        columnType: 'function',
-        columnId: `fx_col_3`,
-        columnIndex: 3,
-        columnUnits: 'units',
-        columnFunction: {
-            colIndex1: 1,
-            colIndex2: 2,
-            operator: '*',
-        },
     },
 ];
 
