@@ -6,6 +6,7 @@ I am mostly happy with how this turned out; having a better understanding how bl
 
 ## How to run the app
 
+Install the dependencies by running `yarn` or `npm install`
 The repository has several scripts that can be run from the root directory. These can be run with `yarn [command]` or `npm run [command]` in your terminal from the root directory, the `[command]`s are as follows:
 
 -   To preview the app in your browser: `dev`
