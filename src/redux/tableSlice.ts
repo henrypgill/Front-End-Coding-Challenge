@@ -83,33 +83,51 @@ export const tableSlice = createSlice({
     initialState,
     reducers: {
         addFxColumn: (state) => {
+            const newColumnIndex = state.columns.length;
+
             state.columns.push({
-                columnName: 'Column Name',
+                columnName: 'Cell Count',
                 columnType: 'function',
                 columnId: `fx_col_${state.columns.length}`,
-                columnIndex: state.columns.length,
-                columnUnits: 'units',
+                columnIndex: newColumnIndex,
+                columnUnits: 'Cell Count',
                 columnFunction: {
                     colIndex1: 1,
                     colIndex2: 2,
                     operator: '/',
                 },
             });
+            state.data = {
+                ...state.data,
+                [newColumnIndex]: {
+                    ...calculateColumnData(state.data[1], state.data[2], '/'),
+                },
+            };
         },
         updateColumnFunction: (
             state,
             {
-                payload,
+                payload: { columnIndex, columnFunction },
             }: PayloadAction<{
                 columnIndex: number;
                 columnFunction: ColumnFunction;
             }>,
         ) => {
             const col = state.columns.find(
-                (col) => col.columnIndex === payload.columnIndex,
+                (col) => col.columnIndex === columnIndex,
             );
             if (col) {
-                col.columnFunction = payload.columnFunction;
+                col.columnFunction = columnFunction;
+                state.data = {
+                    ...state.data,
+                    [columnIndex]: {
+                        ...calculateColumnData(
+                            state.data[columnFunction.colIndex1],
+                            state.data[columnFunction.colIndex2],
+                            columnFunction.operator,
+                        ),
+                    },
+                };
             }
         },
         updateColumnNameAndUnits: (
