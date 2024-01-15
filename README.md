@@ -3,6 +3,7 @@
 I really enjoyed completing this, it was a great opportunity to learn blueprintjs and I'm really happy with the result. My instructions are below, along with improvements I would make to the app were I to work on it further.
 
 I am mostly happy with how this turned out; having a better understanding how blueprintjs works now I would approach it slightly differently next time around, creating more generic components for repeated functionality.
+
 ## How to run the app
 
 The repository has several scripts that can be run from the root directory. These can be run with `yarn [command]` or `npm run [command]` in your terminal from the root directory, the `[command]`s are as follows:
@@ -47,6 +48,7 @@ Several improvements could be made to the app to improve the user experience and
     -   I am not entirely happy with how I have structured the types, it would be better to determine exactly how the data is formatted, whether this is a string or a number, and have a better structure for the types of the columns and the type of data within them.
 
 ## Rate of Change Calculations
+
 Calculating a basic rate of change should be fairly simple. Within the data there are timestamps for each row, and all the data is indexed to a specific column and row. Therefore, for a cell in row m, the rate of cell count growth would be:
 
 `cellCoun[m] - cellCount[m-1] / timestamp[m] - timestamp[m-1]`
