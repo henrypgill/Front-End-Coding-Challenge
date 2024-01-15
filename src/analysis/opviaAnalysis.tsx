@@ -53,7 +53,11 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
     };
 
     const filterColIndexes = columns
-        .filter((col) => col.columnType !== 'number')
+        .filter((col) => {
+            if (col.columnType === 'function') return false;
+            else if (col.columnType === 'number') return false;
+            else return true;
+        })
         .map((col) => col.columnIndex);
 
     if (editing) {
