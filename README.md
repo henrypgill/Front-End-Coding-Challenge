@@ -35,6 +35,7 @@ Several improvements could be made to the app to improve the user experience and
 
     -   The way the aggregates are displayed is overly large, a condensed view would be beneficial and take up less visual real-estate.
     -   It is also not clear to the user that the aggregate is clickable, and that clicking on it will bring up the menu. A menu or edit icon in the corner of each card would be a far better way of presenting these interactions to the user.
+    -   Aggregates performed on calculation columns don't update when the column formula is changed. This is largely due to the seperation of the table and the aggregates, and could be fixed by having the table and the aggregates share the same state.
 
 -   ### Columns
 
