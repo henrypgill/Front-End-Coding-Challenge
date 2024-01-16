@@ -11,6 +11,8 @@ import AggregateTypeSelect from './AggregateTypeSelect';
 import getAggregateIcon from './getAggregateIcon';
 import getAggregateValue from './getAggregateValue';
 import { Menu } from '@blueprintjs/icons';
+import { analysisActions } from '../redux/analysisSlice';
+import { Aggregate, AggregateUpdate } from '../types/analysisTypes';
 interface AggregateCardProps {
     aggregate: Aggregate;
 }
