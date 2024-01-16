@@ -2,50 +2,30 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
 import { calculateColumnData } from '../core/performCalculation';
-import { ColumnFunction, OpviaTableColumn, TableData } from '../types/tableTypes';
+import {
+    ColumnFunction,
+    OpviaTableColumn,
+    TableData,
+} from '../types/tableTypes';
+import { Aggregate } from '../types/analysisTypes';
+import getInitialTableState from './initialStates';
+import getAggregateValue from '../core/getAggregateValue';
 
+export interface Analysis {
+    aggregates: Aggregate[];
+}
 
 // define an interface for the state of the OpviaTable
 export interface OpviaTableState {
     data: TableData;
     columns: OpviaTableColumn[];
+    analysis: Analysis;
 }
-
-// declare the initial state of the columns for the table
-const defaultColumns: OpviaTableColumn[] = [
-    {
-        columnName: 'Time',
-        columnType: 'time',
-        columnId: 'time_col',
-        columnIndex: 0,
-        columnUnits: 'date and time',
-    },
-    {
-        columnName: 'Cell Density',
-        columnType: 'number',
-        columnId: 'var_col_1',
-        columnIndex: 1,
-        columnUnits: 'Cell Count/Litre',
-    },
-    {
-        columnName: 'Volume',
-        columnType: 'number',
-        columnId: 'var_col_2',
-        columnIndex: 2,
-        columnUnits: 'Litres',
-    },
-];
-
-// declare the initial state for the slice
-const initialState: OpviaTableState = {
-    data: mapData(dummyTableData),
-    columns: defaultColumns,
-};
 
 // create the redux slice
 export const tableSlice = createSlice({
     name: 'table',
-    initialState,
+    initialState: getInitialTableState(),
     reducers: {
         addFxColumn: (state) => {
             const newColumnIndex = state.columns.length;
@@ -72,27 +52,46 @@ export const tableSlice = createSlice({
         updateColumnFunction: (
             state,
             {
-                payload: { columnIndex, columnFunction },
+                payload,
             }: PayloadAction<{
                 columnIndex: number;
                 columnFunction: ColumnFunction;
             }>,
         ) => {
             const col = state.columns.find(
-                (col) => col.columnIndex === columnIndex,
+                (col) => col.columnIndex === payload.columnIndex,
             );
             if (col) {
-                col.columnFunction = columnFunction;
+                const columnData = calculateColumnData(
+                    state.data[payload.columnFunction.colIndex1],
+                    state.data[payload.columnFunction.colIndex2],
+                    payload.columnFunction.operator,
+                );
+                col.columnFunction = payload.columnFunction;
                 state.data = {
                     ...state.data,
-                    [columnIndex]: {
-                        ...calculateColumnData(
-                            state.data[columnFunction.colIndex1],
-                            state.data[columnFunction.colIndex2],
-                            columnFunction.operator,
-                        ),
-                    },
+                    [payload.columnIndex]: columnData,
                 };
+                const columnAggregates = state.analysis.aggregates.filter(
+                    (agg) => agg.columnIndex === payload.columnIndex,
+                );
+                if (columnAggregates.length > 0) {
+                    state.analysis.aggregates = state.analysis.aggregates.map(
+                        (agg) => {
+                            if (agg.columnIndex === payload.columnIndex) {
+                                return {
+                                    ...agg,
+                                    value: getAggregateValue(
+                                        columnData,
+                                        agg.type,
+                                    ),
+                                };
+                            } else {
+                                return agg;
+                            }
+                        },
+                    );
+                }
             }
         },
         updateColumnNameAndUnits: (
@@ -112,6 +111,20 @@ export const tableSlice = createSlice({
                 col.columnName = payload.columnName;
                 col.columnUnits = payload.columnUnits;
             }
+        },
+        addAggregate: (
+            state,
+            { payload }: PayloadAction<Omit<Aggregate, 'aggregateId'>>,
+        ) => {
+            state.analysis.aggregates.push({
+                ...payload,
+                aggregateId: `agg_${payload.type}_${state.analysis.aggregates.length}`,
+            });
+        },
+        updateAggregate: (state, { payload }: PayloadAction<Aggregate>) => {
+            state.analysis.aggregates = state.analysis.aggregates.map((agg) =>
+                agg.aggregateId === payload.aggregateId ? payload : agg,
+            );
         },
     },
 });
