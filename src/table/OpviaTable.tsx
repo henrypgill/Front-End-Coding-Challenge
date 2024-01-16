@@ -11,55 +11,13 @@ import { ColumnType, OpviaTableColumn } from '../types/tableTypes';
 import ChangeColumnFunctionInput from './ChangeColumnFunctionInput';
 import ChangeColumnNameInput from './ChangeColumnNameInput';
 import getCellRenderer from './getCellRenderer';
+import getHeaderCellRenderer from './getHeaderCellRenderer';
 
 const OpviaTable: React.FC = () => {
     const { data, columns } = useAppSelector((state) => state.table);
 
-    const columnNameRenderer = (column: OpviaTableColumn) => {
-        return (
-            <EntityTitle
-                title={column.columnName}
-                subtitle={column.columnUnits}
-            />
-        );
-    };
 
-    const getHeaderCellRenderer = (columnType: ColumnType) => {
-        const headerCellRenderer = (colIndex: number) => {
-            const column = columns.find((col) => col.columnIndex === colIndex)!;
-
-            const menuRenderer = () => {
-                return (
-                    <Menu style={{ padding: 8 }}>
-                        <div>
-                            <strong>Settings</strong>
-                        </div>
-                        <Divider />
-                        <ChangeColumnNameInput column={column} />
-                        {columnType === 'function' && (
-                            <>
-                                <div>
-                                    <strong>Equation</strong>
-                                </div>
-                                <Divider />
-                                <ChangeColumnFunctionInput column={column} />
-                            </>
-                        )}
-                    </Menu>
-                );
-            };
-
-            return (
-                <ColumnHeaderCell2
-                    nameRenderer={() => columnNameRenderer(column)}
-                    menuIcon={'menu'}
-                    menuRenderer={menuRenderer}
-                ></ColumnHeaderCell2>
-            );
-        };
-        return headerCellRenderer;
-    };
-
+    
     const cols = columns.map((column) => {
         return (
             <Column
@@ -67,6 +25,7 @@ const OpviaTable: React.FC = () => {
                 cellRenderer={getCellRenderer(column, data)}
                 columnHeaderCellRenderer={getHeaderCellRenderer(
                     column.columnType,
+                    columns
                 )}
                 name={column.columnName}
             />
