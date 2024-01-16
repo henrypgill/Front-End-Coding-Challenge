@@ -4,11 +4,13 @@ import { useAppDispatch } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 import { OpviaTableColumn } from '../types/tableTypes';
 
-interface ColumnNameMenuItemProps {
+interface ChangeColumnNameInputProps {
     column: OpviaTableColumn;
 }
 
-const ColumnNameMenuItem: React.FC<ColumnNameMenuItemProps> = ({ column }) => {
+const ChangeColumnNameInput: React.FC<ChangeColumnNameInputProps> = ({
+    column,
+}) => {
     const dispatch = useAppDispatch();
     const [name, setName] = React.useState(column.columnName);
     const [units, setUnits] = React.useState(column.columnUnits);
@@ -39,11 +41,15 @@ const ColumnNameMenuItem: React.FC<ColumnNameMenuItemProps> = ({ column }) => {
                 fill={false}
                 style={{ width: 124 }}
             />
-            <Button icon="confirm" onClick={updateColumnNameAndUnits}>
+            <Button
+                icon="confirm"
+                onClick={updateColumnNameAndUnits}
+                intent="primary"
+            >
                 Confirm
             </Button>
         </ControlGroup>
     );
 };
 
-export default ColumnNameMenuItem;
+export default ChangeColumnNameInput;

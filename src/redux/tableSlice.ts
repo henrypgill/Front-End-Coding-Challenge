@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
-import { calculateColumnData } from '../core/performCalculation';
 import {
     ColumnFunction,
     OpviaTableColumn,
@@ -10,6 +9,7 @@ import {
 import { Aggregate } from '../types/analysisTypes';
 import getInitialTableState from './initialStates';
 import getAggregateValue from '../core/getAggregateValue';
+import { calculateFunctionColumnData } from '../core/performCalculation';
 
 export interface Analysis {
     aggregates: Aggregate[];
@@ -45,7 +45,11 @@ export const tableSlice = createSlice({
             state.data = {
                 ...state.data,
                 [newColumnIndex]: {
-                    ...calculateColumnData(state.data[1], state.data[2], '/'),
+                    ...calculateFunctionColumnData(
+                        state.data[1],
+                        state.data[2],
+                        '/',
+                    ),
                 },
             };
         },
@@ -62,7 +66,7 @@ export const tableSlice = createSlice({
                 (col) => col.columnIndex === payload.columnIndex,
             );
             if (col) {
-                const columnData = calculateColumnData(
+                const columnData = calculateFunctionColumnData(
                     state.data[payload.columnFunction.colIndex1],
                     state.data[payload.columnFunction.colIndex2],
                     payload.columnFunction.operator,

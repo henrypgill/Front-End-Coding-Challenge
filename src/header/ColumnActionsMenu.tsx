@@ -3,7 +3,7 @@ import * as React from 'react';
 import { tableActions } from '../redux/tableSlice';
 import { useAppDispatch } from '../redux/store';
 
-const AddFxColumn: React.FC = () => {
+const AddFunctionColumnMenuItem: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const addFxColumnHandler = () => {
@@ -21,10 +21,10 @@ const AddFxColumn: React.FC = () => {
     );
 };
 
-const ColumnActionsMenu: React.FC = () => {
+const NavAddColumnMenu: React.FC = () => {
     const columnMenu = (
         <Menu>
-            <AddFxColumn />
+            <AddFunctionColumnMenuItem />
         </Menu>
     );
 
@@ -41,4 +41,4 @@ const ColumnActionsMenu: React.FC = () => {
     );
 };
 
-export default ColumnActionsMenu;
+export default NavAddColumnMenu;

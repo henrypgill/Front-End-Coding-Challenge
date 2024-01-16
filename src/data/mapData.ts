@@ -18,15 +18,3 @@ export function mapData(dataSet: { [key: string]: string | number }) {
 
     return mappedData;
 }
-
-// keeping old functions from OpviaTable for reference
-// const getSparseRefFromIndexes = (
-//     rowIndex: number,
-//     columnIndex: number,
-// ): string => `${columnIndex}-${rowIndex}`;
-
-// const dataCellRenderer: CellRenderer = (rowIndex: number, columnIndex: number) => {
-//     const sparsePosition = getSparseRefFromIndexes(rowIndex, columnIndex);
-//     const value = dummyTableData[sparsePosition];
-//     return <Cell>{String(value)}</Cell>;
-// };

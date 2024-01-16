@@ -17,7 +17,7 @@ export const performCalculation = (
     }
 };
 
-export const calculateColumnData = (
+export const calculateFunctionColumnData = (
     col1Data: TableColumnData,
     col2Data: TableColumnData,
     operator: ColumnFunctionOperator,

@@ -8,7 +8,7 @@ interface AnalysisColumnSectionProps {
     aggregates: Aggregate[];
 }
 
-const AnalysisColumnSection: React.FC<AnalysisColumnSectionProps> = ({
+const AnalysisColumnCard: React.FC<AnalysisColumnSectionProps> = ({
     columnName,
     aggregates,
 }) => {
@@ -30,7 +30,7 @@ const AnalysisColumnSection: React.FC<AnalysisColumnSectionProps> = ({
     );
 };
 
-const Analysis = () => {
+const OpviaAnalysis = () => {
     const {
         analysis: { aggregates },
         columns,
@@ -47,7 +47,7 @@ const Analysis = () => {
         );
         if (!colAggregates[0]) return undefined;
         return (
-            <AnalysisColumnSection
+            <AnalysisColumnCard
                 columnName={col.columnName}
                 aggregates={colAggregates}
                 key={col.columnId}
@@ -81,4 +81,4 @@ const Analysis = () => {
     );
 };
 
-export default Analysis;
+export default OpviaAnalysis;

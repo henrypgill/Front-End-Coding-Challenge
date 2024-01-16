@@ -3,7 +3,7 @@ import getAggregateValue from '../core/getAggregateValue';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 
-const AnalyseActionsMenu: React.FC = () => {
+const NavAnalysisMenu: React.FC = () => {
     const dispatch = useAppDispatch();
     const data = useAppSelector((state) => state.table.data);
 
@@ -54,4 +54,4 @@ const AnalyseActionsMenu: React.FC = () => {
     );
 };
 
-export default AnalyseActionsMenu;
+export default NavAnalysisMenu;

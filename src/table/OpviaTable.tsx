@@ -2,63 +2,18 @@ import * as React from 'react';
 
 import { Divider, EntityTitle, Menu } from '@blueprintjs/core';
 import {
-    Cell,
-    CellRenderer,
     Column,
     ColumnHeaderCell2,
-    Table2,
+    Table2
 } from '@blueprintjs/table';
 import { useAppSelector } from '../redux/store';
-import ColumnNameMenuItem from './ColumnNameMenuItem';
-import EquationInputMenu from './EquationInputMenu';
 import { ColumnType, OpviaTableColumn } from '../types/tableTypes';
+import ChangeColumnFunctionInput from './ChangeColumnFunctionInput';
+import ChangeColumnNameInput from './ChangeColumnNameInput';
+import getCellRenderer from './getCellRenderer';
 
 const OpviaTable: React.FC = () => {
     const { data, columns } = useAppSelector((state) => state.table);
-
-    const emptyCellRenderer: CellRenderer = (
-        rowIndex: number,
-        columnIndex: number,
-    ) => {
-        return <Cell>{''}</Cell>;
-    };
-
-    const dataCellRenderer: CellRenderer = (
-        rowIndex: number,
-        columnIndex: number,
-    ) => {
-        const value = parseInt(data[columnIndex][rowIndex]).toFixed(2);
-        return <Cell>{String(value)}</Cell>;
-    };
-
-    const stringCellRenderer: CellRenderer = (
-        rowIndex: number,
-        columnIndex: number,
-    ) => {
-        const value = data[columnIndex][rowIndex];
-        return <Cell>{String(value)}</Cell>;
-    };
-
-    const timeCellRenderer = (rowIndex: number, columnIndex: number) => {
-        const dateTime = new Date(data[columnIndex][rowIndex]);
-
-        return <Cell>{String(dateTime.toLocaleString('en-GB'))}</Cell>;
-    };
-
-    const getCellRenderer = (column: OpviaTableColumn) => {
-        switch (column.columnType) {
-            case 'function':
-                return dataCellRenderer;
-            case 'number':
-                return dataCellRenderer;
-            case 'string':
-                return stringCellRenderer;
-            case 'time':
-                return timeCellRenderer;
-            default:
-                return emptyCellRenderer;
-        }
-    };
 
     const columnNameRenderer = (column: OpviaTableColumn) => {
         return (
@@ -80,19 +35,20 @@ const OpviaTable: React.FC = () => {
                             <strong>Settings</strong>
                         </div>
                         <Divider />
-                        <ColumnNameMenuItem column={column} />
+                        <ChangeColumnNameInput column={column} />
                         {columnType === 'function' && (
                             <>
                                 <div>
                                     <strong>Equation</strong>
                                 </div>
                                 <Divider />
-                                <EquationInputMenu column={column} />
+                                <ChangeColumnFunctionInput column={column} />
                             </>
                         )}
                     </Menu>
                 );
             };
+
             return (
                 <ColumnHeaderCell2
                     nameRenderer={() => columnNameRenderer(column)}
@@ -108,7 +64,7 @@ const OpviaTable: React.FC = () => {
         return (
             <Column
                 key={`${column.columnId}`}
-                cellRenderer={getCellRenderer(column)}
+                cellRenderer={getCellRenderer(column, data)}
                 columnHeaderCellRenderer={getHeaderCellRenderer(
                     column.columnType,
                 )}

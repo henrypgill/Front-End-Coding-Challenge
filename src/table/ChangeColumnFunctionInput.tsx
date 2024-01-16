@@ -31,7 +31,9 @@ type ColumnFunctionUpdateInput =
     | ColumnFunctionColumnUpdate
     | ColumnFunctionOperatorUpdate;
 
-const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
+const ChangeColumnFunctionInput: React.FC<EquationInputMenuProps> = ({
+    column,
+}) => {
     const dispatch = useAppDispatch();
     const { columns } = useAppSelector((state) => state.table);
 
@@ -100,4 +102,4 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     );
 };
 
-export default EquationInputMenu;
+export default ChangeColumnFunctionInput;
