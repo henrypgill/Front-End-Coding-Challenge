@@ -1,8 +1,8 @@
-import { AggregateType } from '../redux/analysisSlice';
-import { TableColumn } from '../redux/tableSlice';
+import { AggregateType } from "../types/analysisTypes";
+import { TableColumnData } from "../types/tableTypes";
 
 const getAggregateValue = (
-    columnData: TableColumn,
+    columnData: TableColumnData,
     type: AggregateType,
 ): number | 'NaN' => {
     const data: number[] = [];
