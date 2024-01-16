@@ -126,6 +126,11 @@ export const tableSlice = createSlice({
                 agg.aggregateId === payload.aggregateId ? payload : agg,
             );
         },
+        deleteAggregate: (state, { payload }: PayloadAction<Aggregate>) => {
+            state.analysis.aggregates = state.analysis.aggregates.filter(
+                (agg) => agg.aggregateId !== payload.aggregateId,
+            );
+        },
     },
 });
 
