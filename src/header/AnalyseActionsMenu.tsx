@@ -1,7 +1,7 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core';
-import getAggregateValue from '../analysis/getAggregateValue';
-import { analysisActions } from '../redux/analysisSlice';
+import getAggregateValue from '../core/getAggregateValue';
 import { useAppDispatch, useAppSelector } from '../redux/store';
+import { tableActions } from '../redux/tableSlice';
 
 const AnalyseActionsMenu: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ const AnalyseActionsMenu: React.FC = () => {
 
     const addMaximumAggregate = () => {
         dispatch(
-            analysisActions.addAggregate({
+            tableActions.addAggregate({
                 type: 'maximum',
                 columnIndex: 1,
                 value: getAggregateValue(data[1], 'maximum'),
@@ -18,7 +18,7 @@ const AnalyseActionsMenu: React.FC = () => {
     };
     const addMinimumAggregate = () => {
         dispatch(
-            analysisActions.addAggregate({
+            tableActions.addAggregate({
                 type: 'minimum',
                 columnIndex: 1,
                 value: getAggregateValue(data[1], 'minimum'),
