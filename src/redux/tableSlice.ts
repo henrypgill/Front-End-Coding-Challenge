@@ -2,30 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { dummyTableData } from '../data/dummyData';
 import { mapData } from '../data/mapData';
 import { calculateColumnData } from '../core/performCalculation';
+import { ColumnFunction, OpviaTableColumn, TableData } from '../types/tableTypes';
 
-// define the type for the data containing object that is passed to the table
-export type TableColumn = { [key: string]: string };
-export type TableData = {
-    [key: string]: TableColumn;
-};
-
-// define types and an interface that represents a column to be rendered in the table
-export type ColumnType = 'time' | 'number' | 'string' | 'function';
-export type ColumnFunctionOperator = '*' | '/' | '+' | '-';
-export interface ColumnFunction {
-    colIndex1: number;
-    colIndex2: number;
-    operator: ColumnFunctionOperator;
-}
-
-export interface OpviaTableColumn {
-    columnName: string;
-    columnType: ColumnType;
-    columnId: string;
-    columnFunction?: ColumnFunction;
-    columnUnits: string;
-    columnIndex: number;
-}
 
 // define an interface for the state of the OpviaTable
 export interface OpviaTableState {
