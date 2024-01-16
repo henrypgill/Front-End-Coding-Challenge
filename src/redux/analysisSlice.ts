@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Aggregate } from '../types/tableTypes';
+import { Aggregate } from '../types/analysisTypes';
 
 
 export interface OpviaAnalysisState {
