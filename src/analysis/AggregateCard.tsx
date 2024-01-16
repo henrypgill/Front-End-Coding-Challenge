@@ -1,56 +1,41 @@
 import {
-    Card,
     Button,
-    Icon,
-    Divider,
-    Popover,
-    MenuItem,
-    Menu,
+    Card,
     ControlGroup,
+    Divider,
     EntityTitle,
     H4,
-    H5,
     H6,
+    Icon,
+    Menu,
+    Popover,
 } from '@blueprintjs/core';
 import React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
 import { useAppDispatch, useAppSelector } from '../redux/store';
+import { tableActions } from '../redux/tableSlice';
+import { Aggregate, AggregateType } from '../types/analysisTypes';
 import AggregateTypeSelect from './AggregateTypeSelect';
 import getAggregateIcon from './getAggregateIcon';
-import getAggregateValue from '../core/getAggregateValue';
-import { Aggregate, AggregateUpdate } from '../types/analysisTypes';
-import { tableActions } from '../redux/tableSlice';
 interface AggregateCardProps {
     aggregate: Aggregate;
 }
 const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
     const dispatch = useAppDispatch();
-    const { columns, data } = useAppSelector((state) => state.table);
-    const [editing, setEditing] = React.useState(false);
+    const { columns } = useAppSelector((state) => state.table);
+    const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+    const updateAggregate = { ...aggregate };
 
-    const column = columns.find(
-        (col) => col.columnIndex === aggregate.columnIndex,
-    )!;
+    const handleAggregateUpdate = () => {
+        dispatch(tableActions.updateAggregate(updateAggregate));
+    };
 
-    const handleAggregateUpdate = ({ key, value }: AggregateUpdate) => {
-        let dispatchAction: Aggregate;
-        if (key === 'type') {
-            dispatchAction = {
-                ...aggregate,
-                type: value,
-                value: getAggregateValue(data[column.columnIndex], value),
-            };
-        } else if (key === 'columnIndex') {
-            dispatchAction = {
-                ...aggregate,
-                columnIndex: value,
-                value: getAggregateValue(data[value], aggregate.type),
-            };
-        } else {
-            dispatchAction = aggregate;
-        }
+    const handleAggregateColumnSelect = (columnIndex: number) => {
+        updateAggregate.columnIndex = columnIndex;
+    };
 
-        dispatch(tableActions.updateAggregate(dispatchAction));
+    const handleAggregateTypeSelect = (type: AggregateType) => {
+        updateAggregate.type = type;
     };
 
     const handleAggregateDelete = () => {
@@ -70,7 +55,6 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
         columnGap: 8,
         height: 60,
         width: 240,
@@ -111,10 +95,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                             exclusionColumnIndexes={filterColIndexes}
                             selectedColumnIndex={aggregate.columnIndex}
                             onItemSelect={(col) =>
-                                handleAggregateUpdate({
-                                    key: 'columnIndex',
-                                    value: col.columnIndex,
-                                })
+                                handleAggregateColumnSelect(col.columnIndex)
                             }
                         />
                     </div>
@@ -130,25 +111,33 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                         <AggregateTypeSelect
                             currentType={aggregate.type}
                             onItemSelect={(aggType) =>
-                                handleAggregateUpdate({
-                                    key: 'type',
-                                    value: aggType,
-                                })
+                                handleAggregateTypeSelect(aggType)
                             }
                         />
                     </div>
                 </ControlGroup>
+                <Divider />
+                <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                    <Button intent="primary" onClick={handleAggregateUpdate}>
+                        Save
+                    </Button>
+                </div>
             </Menu>
         );
     };
 
     return (
         <Card compact={true} style={cardStyle}>
-            <Popover content={<AggregateCardMenuContent />} placement="right">
+            <Popover
+                content={<AggregateCardMenuContent />}
+                isOpen={menuIsOpen}
+                placement="right"
+            >
                 <Button
                     icon="cog"
                     minimal={true}
-                    onClick={() => setEditing(true)}
+                    intent="primary"
+                    onClick={() => setMenuIsOpen(!menuIsOpen)}
                 />
             </Popover>
             <Divider style={{ height: '100%' }} />
