@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { dummyTableData } from '../data/dummyData';
-import { mapData } from '../data/mapData';
+import { dummyTableData } from '../core/dummyData';
+import { mapData } from '../core/mapData';
 import {
     ColumnFunction,
     OpviaTableColumn,

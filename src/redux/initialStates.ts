@@ -1,5 +1,5 @@
-import { dummyTableData } from '../data/dummyData';
-import { mapData } from '../data/mapData';
+import { dummyTableData } from '../core/dummyData';
+import { mapData } from '../core/mapData';
 import { OpviaTableColumn } from '../types/tableTypes';
 import { Analysis, OpviaTableState } from './tableSlice';
 
