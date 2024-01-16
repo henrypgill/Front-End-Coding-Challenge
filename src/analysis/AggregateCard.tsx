@@ -5,6 +5,12 @@ import {
     Divider,
     Popover,
     MenuItem,
+    Menu,
+    ControlGroup,
+    EntityTitle,
+    H4,
+    H5,
+    H6,
 } from '@blueprintjs/core';
 import React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
@@ -12,7 +18,6 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 import AggregateTypeSelect from './AggregateTypeSelect';
 import getAggregateIcon from './getAggregateIcon';
 import getAggregateValue from '../core/getAggregateValue';
-import { Menu } from '@blueprintjs/icons';
 import { Aggregate, AggregateUpdate } from '../types/analysisTypes';
 import { tableActions } from '../redux/tableSlice';
 interface AggregateCardProps {
@@ -48,6 +53,10 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
         dispatch(tableActions.updateAggregate(dispatchAction));
     };
 
+    const handleAggregateDelete = () => {
+        dispatch(tableActions.deleteAggregate(aggregate));
+    };
+
     const filterColIndexes = columns
         .filter((col) => {
             if (col.columnType === 'function') return false;
@@ -68,30 +77,68 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
     };
     const AggregateCardMenuContent: React.FC = () => {
         return (
-            <>
-                <TableColumnSelect
-                    exclusionColumnIndexes={filterColIndexes}
-                    selectedColumnIndex={aggregate.columnIndex}
-                    onItemSelect={(col) =>
-                        handleAggregateUpdate({
-                            key: 'columnIndex',
-                            value: col.columnIndex,
-                        })
-                    }
-                />
-                <AggregateTypeSelect
-                    currentType={aggregate.type}
-                    onItemSelect={(aggType) =>
-                        handleAggregateUpdate({
-                            key: 'type',
-                            value: aggType,
-                        })
-                    }
-                />
-                <Button intent="primary" onClick={() => setEditing(false)}>
-                    Done
-                </Button>
-            </>
+            <Menu style={{ padding: 8 }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <EntityTitle title={'Settings'} heading={H4} />
+                    <Button
+                        icon="trash"
+                        intent="danger"
+                        onClick={handleAggregateDelete}
+                    ></Button>
+                </div>
+                <Divider />
+                <ControlGroup
+                    fill={false}
+                    vertical={false}
+                    style={{ padding: 8 }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            rowGap: 4,
+                        }}
+                    >
+                        <EntityTitle title={'Column'} heading={H6} />
+
+                        <TableColumnSelect
+                            exclusionColumnIndexes={filterColIndexes}
+                            selectedColumnIndex={aggregate.columnIndex}
+                            onItemSelect={(col) =>
+                                handleAggregateUpdate({
+                                    key: 'columnIndex',
+                                    value: col.columnIndex,
+                                })
+                            }
+                        />
+                    </div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            rowGap: 4,
+                        }}
+                    >
+                        <EntityTitle title={'Type'} heading={H6} />
+
+                        <AggregateTypeSelect
+                            currentType={aggregate.type}
+                            onItemSelect={(aggType) =>
+                                handleAggregateUpdate({
+                                    key: 'type',
+                                    value: aggType,
+                                })
+                            }
+                        />
+                    </div>
+                </ControlGroup>
+            </Menu>
         );
     };
 
