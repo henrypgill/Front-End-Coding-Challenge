@@ -1,4 +1,4 @@
-import { TableData } from '../redux/tableSlice';
+import { TableData } from '../types/tableTypes';
 
 export function mapData(dataSet: { [key: string]: string | number }) {
     const mappedData: TableData = {};

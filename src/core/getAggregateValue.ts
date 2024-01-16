@@ -1,5 +1,5 @@
-import { AggregateType } from "../types/analysisTypes";
-import { TableColumnData } from "../types/tableTypes";
+import { AggregateType } from '../types/analysisTypes';
+import { TableColumnData } from '../types/tableTypes';
 
 const getAggregateValue = (
     columnData: TableColumnData,

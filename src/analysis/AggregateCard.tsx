@@ -1,18 +1,20 @@
-import { Card, Button, Icon, Divider, Popover, MenuItem } from '@blueprintjs/core';
+import {
+    Card,
+    Button,
+    Icon,
+    Divider,
+    Popover,
+    MenuItem,
+} from '@blueprintjs/core';
 import React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
-import {
-    Aggregate,
-    AggregateUpdate,
-    analysisActions,
-} from '../redux/analysisSlice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import AggregateTypeSelect from './AggregateTypeSelect';
 import getAggregateIcon from './getAggregateIcon';
-import getAggregateValue from './getAggregateValue';
+import getAggregateValue from '../core/getAggregateValue';
 import { Menu } from '@blueprintjs/icons';
-import { analysisActions } from '../redux/analysisSlice';
 import { Aggregate, AggregateUpdate } from '../types/analysisTypes';
+import { tableActions } from '../redux/tableSlice';
 interface AggregateCardProps {
     aggregate: Aggregate;
 }
@@ -41,7 +43,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
             dispatchAction = aggregate;
         }
 
-        dispatch(analysisActions.updateAggregate(dispatchAction));
+        dispatch(tableActions.updateAggregate(dispatchAction));
     };
 
     const filterColIndexes = columns

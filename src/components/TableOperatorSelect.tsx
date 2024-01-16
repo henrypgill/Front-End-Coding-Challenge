@@ -1,6 +1,6 @@
 import { MenuItem, Button } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
-import { ColumnFunctionOperator } from '../redux/tableSlice';
+import { ColumnFunctionOperator } from '../types/tableTypes';
 
 interface TableOperatorSelectProps {
     selectedOperator: ColumnFunctionOperator;

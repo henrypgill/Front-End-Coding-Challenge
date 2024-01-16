@@ -9,9 +9,9 @@ import {
     Table2,
 } from '@blueprintjs/table';
 import { useAppSelector } from '../redux/store';
-import { ColumnType, OpviaTableColumn } from '../redux/tableSlice';
 import ColumnNameMenuItem from './ColumnNameMenuItem';
 import EquationInputMenu from './EquationInputMenu';
+import { ColumnType, OpviaTableColumn } from '../types/tableTypes';
 
 const OpviaTable: React.FC = () => {
     const { data, columns } = useAppSelector((state) => state.table);

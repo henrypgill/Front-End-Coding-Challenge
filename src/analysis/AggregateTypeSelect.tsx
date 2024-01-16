@@ -1,6 +1,6 @@
 import { Button, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
-import { AggregateType } from '../redux/analysisSlice';
+import { AggregateType } from '../types/analysisTypes';
 
 interface AggregateTypeSelectProps {
     currentType: AggregateType;

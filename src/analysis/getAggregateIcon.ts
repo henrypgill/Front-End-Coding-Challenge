@@ -1,4 +1,4 @@
-import { AggregateType } from '../redux/analysisSlice';
+import { AggregateType } from '../types/analysisTypes';
 
 const getAggregateIcon = (aggregateType: AggregateType) => {
     switch (aggregateType) {

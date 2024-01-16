@@ -1,15 +1,14 @@
-import { Button, ControlGroup, MenuItem } from '@blueprintjs/core';
-import { ItemRenderer, Select } from '@blueprintjs/select';
+import { ControlGroup } from '@blueprintjs/core';
 import * as React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
+import TableOperatorSelect from '../components/TableOperatorSelect';
 import { useAppDispatch, useAppSelector } from '../redux/store';
+import { tableActions } from '../redux/tableSlice';
 import {
     ColumnFunction,
     ColumnFunctionOperator,
     OpviaTableColumn,
-    tableActions,
-} from '../redux/tableSlice';
-import TableOperatorSelect from '../components/TableOperatorSelect';
+} from '../types/tableTypes';
 
 interface EquationInputMenuProps {
     column: OpviaTableColumn;
@@ -34,7 +33,7 @@ type ColumnFunctionUpdateInput =
 
 const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
     const dispatch = useAppDispatch();
-    const columns = useAppSelector((state) => state.table.columns);
+    const { columns } = useAppSelector((state) => state.table);
 
     const updateColumnFunction = ({
         columnFunctionKey,
@@ -48,7 +47,6 @@ const EquationInputMenu: React.FC<EquationInputMenuProps> = ({ column }) => {
         } else if (columnFunctionKey === 'operator') {
             columnFunction.operator = value;
         }
-
         dispatch(
             tableActions.updateColumnFunction({
                 columnIndex: column.columnIndex,

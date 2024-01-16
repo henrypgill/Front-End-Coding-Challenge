@@ -25,4 +25,3 @@ export interface OpviaTableColumn {
     columnUnits: string;
     columnIndex: number;
 }
-

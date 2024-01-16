@@ -1,5 +1,3 @@
-
-
 // define an interface for the state of the OpviaAnalysis Slice
 export type AggregateType = 'maximum' | 'minimum';
 export interface Aggregate {
@@ -8,7 +6,6 @@ export interface Aggregate {
     value: string | number;
     aggregateId: string;
 }
-
 
 // interface for updating an aggregates target column
 export interface AggregateColumnUpdate {

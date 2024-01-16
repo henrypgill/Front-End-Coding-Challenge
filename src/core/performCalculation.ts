@@ -1,4 +1,4 @@
-import { ColumnFunctionOperator, TableColumn } from '../redux/tableSlice';
+import { ColumnFunctionOperator, TableColumnData } from '../types/tableTypes';
 
 export const performCalculation = (
     num1: number,
@@ -18,11 +18,11 @@ export const performCalculation = (
 };
 
 export const calculateColumnData = (
-    col1Data: TableColumn,
-    col2Data: TableColumn,
+    col1Data: TableColumnData,
+    col2Data: TableColumnData,
     operator: ColumnFunctionOperator,
 ) => {
-    const calculatedColumnData: TableColumn = {};
+    const calculatedColumnData: TableColumnData = {};
     for (let rowIndex in col1Data) {
         const num1 = parseInt(col1Data[rowIndex]);
         const num2 = parseInt(col2Data[rowIndex]);
