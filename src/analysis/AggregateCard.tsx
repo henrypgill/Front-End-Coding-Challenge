@@ -21,6 +21,8 @@ interface AggregateCardProps {
 const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
     const dispatch = useAppDispatch();
     const { columns, data } = useAppSelector((state) => state.table);
+    const [editing, setEditing] = React.useState(false);
+
     const column = columns.find(
         (col) => col.columnIndex === aggregate.columnIndex,
     )!;
@@ -54,6 +56,16 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
         })
         .map((col) => col.columnIndex);
 
+    const cardStyle: React.CSSProperties = {
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        columnGap: 8,
+        height: 60,
+        width: 240,
+    };
     const AggregateCardMenuContent: React.FC = () => {
         return (
             <>
@@ -66,7 +78,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                             value: col.columnIndex,
                         })
                     }
-                    />
+                />
                 <AggregateTypeSelect
                     currentType={aggregate.type}
                     onItemSelect={(aggType) =>
@@ -75,40 +87,27 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                             value: aggType,
                         })
                     }
-                    />
-                <Button intent="primary" onClick={() => {}}>
-                    save
+                />
+                <Button intent="primary" onClick={() => setEditing(false)}>
+                    Done
                 </Button>
             </>
         );
     };
 
     return (
-        <Card
-            compact={true}
-            style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-            }}
-        >
-            <Popover
-            content={<AggregateCardMenuContent />}
-            placement='bottom'
-            
-            >
+        <Card compact={true} style={cardStyle}>
+            <Popover content={<AggregateCardMenuContent />} placement="right">
                 <Button
                     icon="cog"
                     minimal={true}
-                    onClick={() => {}}
+                    onClick={() => setEditing(true)}
                 />
             </Popover>
+            <Divider style={{ height: '100%' }} />
             <Icon icon={getAggregateIcon(aggregate.type)} size={20} />
-            <Divider />
-            <h2>{`${aggregate.type} ${column.columnName}`.toLowerCase()}</h2>
-            <Divider />
-            <h3>{aggregate.value}</h3>
+            <h4>{`${aggregate.type}:`.toLowerCase()}</h4>
+            <h4>{aggregate.value}</h4>
         </Card>
     );
 };
