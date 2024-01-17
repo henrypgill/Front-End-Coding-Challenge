@@ -1,12 +1,15 @@
-import { Divider, EntityTitle, Menu } from "@blueprintjs/core";
-import { ColumnHeaderCell2 } from "@blueprintjs/table";
-import { ColumnType, OpviaTableColumn } from "../types/tableTypes";
-import ChangeColumnFunctionInput from "./ChangeColumnFunctionInput";
-import ChangeColumnNameInput from "./ChangeColumnNameInput";
+import { Button, EntityTitle } from '@blueprintjs/core';
+import { ColumnHeaderCell2 } from '@blueprintjs/table';
+import { OpviaTableColumn } from '../types/tableTypes';
+import ColumnSettingsMenu from './ColumnSettingsMenu';
 
-const getHeaderCellRenderer = (columnType: ColumnType, columns: OpviaTableColumn[]) => {
-
-
+const getHeaderCellRenderer = (
+    columns: OpviaTableColumn[],
+    openColumnMenuIndex: number | undefined,
+    setOpenColumnMenuIndex: React.Dispatch<
+        React.SetStateAction<number | undefined>
+    >,
+) => {
     const columnNameRenderer = (column: OpviaTableColumn) => {
         return (
             <EntityTitle
@@ -18,38 +21,46 @@ const getHeaderCellRenderer = (columnType: ColumnType, columns: OpviaTableColumn
 
     const headerCellRenderer = (colIndex: number) => {
         const column = columns.find((col) => col.columnIndex === colIndex)!;
-
+        const isOpen = openColumnMenuIndex === column.columnIndex;
         const menuRenderer = () => {
             return (
-                <Menu style={{ padding: 8 }}>
-                    <div>
-                        <strong>Settings</strong>
-                    </div>
-                    <Divider />
-                    <ChangeColumnNameInput column={column} />
-                    {columnType === 'function' && (
-                        <>
-                            <div>
-                                <strong>Equation</strong>
-                            </div>
-                            <Divider />
-                            <ChangeColumnFunctionInput column={column} />
-                        </>
-                    )}
-                </Menu>
+                <ColumnSettingsMenu
+                    column={column}
+                    setOpenColumnMenuIndex={setOpenColumnMenuIndex}
+                />
             );
         };
 
         return (
             <ColumnHeaderCell2
                 nameRenderer={() => columnNameRenderer(column)}
-                menuIcon={'menu'}
+                menuIcon={
+                    <Button
+                        icon="cog"
+                        minimal={true}
+                        intent="primary"
+                        onClick={() =>
+                            setOpenColumnMenuIndex(column.columnIndex)
+                        }
+                    />
+                }
                 menuRenderer={menuRenderer}
-            ></ColumnHeaderCell2>
+                menuPopoverProps={{
+                    isOpen: isOpen,
+                    onInteraction: (nextOpenState, e) => {
+                        if (e && e!.target instanceof HTMLElement) {
+                            if (!e.target.className.includes('bp5')) {
+                                nextOpenState
+                                    ? setOpenColumnMenuIndex(column.columnIndex)
+                                    : setOpenColumnMenuIndex(undefined);
+                            }
+                        }
+                    },
+                }}
+            />
         );
     };
     return headerCellRenderer;
 };
 
-
-export default getHeaderCellRenderer
+export default getHeaderCellRenderer;
