@@ -13,7 +13,8 @@ const getCellRenderer = (column: OpviaTableColumn, data: TableData) => {
         rowIndex: number,
         columnIndex: number,
     ) => {
-        return <Cell>{String(data[columnIndex][rowIndex])}</Cell>;
+        const value = parseFloat(data[columnIndex][rowIndex]).toFixed(2);
+        return <Cell>{String(value)}</Cell>;
     };
 
     const stringCellRenderer: CellRenderer = (
