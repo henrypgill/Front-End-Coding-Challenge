@@ -1,31 +1,25 @@
 import * as React from 'react';
 
-import { Divider, EntityTitle, Menu } from '@blueprintjs/core';
-import {
-    Column,
-    ColumnHeaderCell2,
-    Table2
-} from '@blueprintjs/table';
+import { Column, Table2 } from '@blueprintjs/table';
 import { useAppSelector } from '../redux/store';
-import { ColumnType, OpviaTableColumn } from '../types/tableTypes';
-import ChangeColumnFunctionInput from './ChangeColumnFunctionInput';
-import ChangeColumnNameInput from './ChangeColumnNameInput';
 import getCellRenderer from './getCellRenderer';
 import getHeaderCellRenderer from './getHeaderCellRenderer';
 
 const OpviaTable: React.FC = () => {
     const { data, columns } = useAppSelector((state) => state.table);
+    const [openColumnMenuIndex, setOpenColumnMenuIndex] = React.useState<
+        number | undefined
+    >(undefined);
 
-
-    
     const cols = columns.map((column) => {
         return (
             <Column
                 key={`${column.columnId}`}
                 cellRenderer={getCellRenderer(column, data)}
                 columnHeaderCellRenderer={getHeaderCellRenderer(
-                    column.columnType,
-                    columns
+                    columns,
+                    openColumnMenuIndex,
+                    setOpenColumnMenuIndex,
                 )}
                 name={column.columnName}
             />
