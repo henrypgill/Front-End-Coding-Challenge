@@ -116,6 +116,17 @@ export const tableSlice = createSlice({
                 col.columnUnits = payload.columnUnits;
             }
         },
+        deleteColumn: (
+            state,
+            {
+                payload: { columnIndex },
+            }: PayloadAction<{ columnIndex: number }>,
+        ) => {
+            state.columns = state.columns.filter(
+                (col) => col.columnIndex !== columnIndex,
+            );
+            delete state.data[columnIndex];
+        },
         addAggregate: (
             state,
             { payload }: PayloadAction<Omit<Aggregate, 'aggregateId'>>,
