@@ -24,8 +24,8 @@ export const calculateFunctionColumnData = (
 ) => {
     const calculatedColumnData: TableColumnData = {};
     for (let rowIndex in col1Data) {
-        const num1 = parseInt(col1Data[rowIndex]);
-        const num2 = parseInt(col2Data[rowIndex]);
+        const num1 = parseFloat(col1Data[rowIndex]);
+        const num2 = parseFloat(col2Data[rowIndex]);
         const result = performCalculation(num1, num2, operator);
         Object.defineProperty(calculatedColumnData, rowIndex, {
             value: String(result),
