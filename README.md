@@ -31,22 +31,13 @@ An aggregate that has already been added can be clicked on to bring up the menu 
 
 Several improvements could be made to the app to improve the user experience and it's functionality. Additional features such as the ability to add graphs from the analysis menu, or delete columns from the table would be beneficial to the user when looking data. There are also several improvements that can be made to the existing features of the app:
 
--   ### Aggregates
-
-    -   The way the aggregates are displayed is overly large, a condensed view would be beneficial and take up less visual real-estate.
-    -   It is also not clear to the user that the aggregate is clickable, and that clicking on it will bring up the menu. A menu or edit icon in the corner of each card would be a far better way of presenting these interactions to the user.
-    -   Aggregates performed on calculation columns don't update when the column formula is changed. This is largely due to the seperation of the table and the aggregates, and could be fixed by having the table and the aggregates share the same state.
-
 -   ### Columns
 
-    -   The menu dismisses every time a change is made to the formula of a calculation column, which can be frustrating if the user is trying to make several changes at once. The menu could be improved by allowing the user to dismiss it manually, or by only dismissing it when the user clicks outside of the menu.
     -   The complexity of formulas that are able to be entered is rather limited, integrating a library such as math.js would allow for more complex formulas to be entered by the user as a string, which would additionally make a big improvement to the user experience.
     -   The menu for all columns would benefit from additional functionality, such as sorting or changing how the data is displayed.
 
 -   ### General
     -   The way state is structured works, but will likely become difficult to work with as more functionality is added to the app. the seperation of column information and data creates a degree of seperation between two related entities that is unnecessary, and also slightly counterintuitive.
-    -   Greater use of Blueprintjs' intent system would improve the visuals of the app, and help better guide the user through its' use.
-    -   The way the menu icon of columns is displayed does not match the styling of the rest of the app, and could be better formatted.
     -   I am not entirely happy with how I have structured the types, it would be better to determine exactly how the data is formatted, whether this is a string or a number, and have a better structure for the types of the columns and the type of data within them.
 
 ## Rate of Change Calculations
