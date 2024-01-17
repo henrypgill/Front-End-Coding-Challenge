@@ -33,11 +33,21 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
         height: 60,
         width: 240,
     };
-
+    let value: string;
+    if (typeof aggregate.value === 'number') {
+        value = aggregate.value.toFixed(2);
+    } else {
+        value = aggregate.value;
+    }
     return (
         <Card compact={true} style={cardStyle}>
             <Popover
-                content={<AggregateCardMenu aggregate={aggregate} />}
+                content={
+                    <AggregateCardMenu
+                        aggregate={aggregate}
+                        setMenuIsOpen={setMenuIsOpen}
+                    />
+                }
                 isOpen={menuIsOpen}
                 placement="right"
             >
@@ -51,7 +61,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
             <Divider style={{ height: '100%' }} />
             <Icon icon={getAggregateIcon(aggregate.type)} size={20} />
             <h4>{`${aggregate.type}:`.toLowerCase()}</h4>
-            <h4>{aggregate.value}</h4>
+            <h4>{value}</h4>
         </Card>
     );
 };
