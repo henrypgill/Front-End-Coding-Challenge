@@ -6,10 +6,12 @@ import { OpviaTableColumn } from '../types/tableTypes';
 
 interface ChangeColumnNameInputProps {
     column: OpviaTableColumn;
+    onConfirmClick: () => void;
 }
 
 const ChangeColumnNameInput: React.FC<ChangeColumnNameInputProps> = ({
     column,
+    onConfirmClick,
 }) => {
     const dispatch = useAppDispatch();
     const [name, setName] = React.useState(column.columnName);
@@ -23,6 +25,11 @@ const ChangeColumnNameInput: React.FC<ChangeColumnNameInputProps> = ({
                 columnUnits: units,
             }),
         );
+    };
+
+    const handleConfirmClick = () => {
+        onConfirmClick();
+        updateColumnNameAndUnits();
     };
 
     return (
@@ -42,8 +49,8 @@ const ChangeColumnNameInput: React.FC<ChangeColumnNameInputProps> = ({
                 style={{ width: 124 }}
             />
             <Button
-                icon="confirm"
-                onClick={updateColumnNameAndUnits}
+                rightIcon="confirm"
+                onClick={handleConfirmClick}
                 intent="primary"
             >
                 Confirm
