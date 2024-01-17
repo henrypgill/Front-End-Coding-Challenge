@@ -7,7 +7,7 @@ const getAggregateValue = (
 ): number | 'NaN' => {
     const data: number[] = [];
     for (let row in columnData) {
-        data.push(parseInt(columnData[row]));
+        data.push(parseFloat(columnData[row]));
     }
     try {
         switch (type) {
