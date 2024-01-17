@@ -137,8 +137,14 @@ export const tableSlice = createSlice({
             });
         },
         updateAggregate: (state, { payload }: PayloadAction<Aggregate>) => {
+            const aggregateValue = getAggregateValue(
+                state.data[String(payload.columnIndex)],
+                payload.type,
+            );
             state.analysis.aggregates = state.analysis.aggregates.map((agg) =>
-                agg.aggregateId === payload.aggregateId ? payload : agg,
+                agg.aggregateId === payload.aggregateId
+                    ? { ...payload, value: aggregateValue }
+                    : agg,
             );
         },
         deleteAggregate: (state, { payload }: PayloadAction<Aggregate>) => {
