@@ -13,31 +13,42 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 import { Aggregate, AggregateType } from '../types/analysisTypes';
+import getAggregateValue from '../core/getAggregateValue';
 
 interface AggregateCardMenuProps {
     aggregate: Aggregate;
+    setMenuIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({ aggregate }) => {
+const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({
+    aggregate,
+    setMenuIsOpen,
+}) => {
     const dispatch = useAppDispatch();
     const { columns } = useAppSelector((state) => state.table);
-    const [menuIsOpen, setMenuIsOpen] = React.useState(false);
-    const updateAggregate = { ...aggregate };
+    const [updateAggregate, setUpdateAggregate] = React.useState<Aggregate>({
+        ...aggregate,
+    });
 
     const handleAggregateUpdate = () => {
         dispatch(tableActions.updateAggregate(updateAggregate));
+        setMenuIsOpen(false);
     };
 
     const handleAggregateColumnSelect = (columnIndex: number) => {
-        updateAggregate.columnIndex = columnIndex;
+        setUpdateAggregate((agg) => {
+            return { ...agg, columnIndex: columnIndex };
+        });
     };
 
     const handleAggregateTypeSelect = (type: AggregateType) => {
-        updateAggregate.type = type;
+        setUpdateAggregate((agg) => {
+            return { ...agg, type: type };
+        });
     };
 
     const handleAggregateDelete = () => {
-        dispatch(tableActions.deleteAggregate(aggregate));
+        dispatch(tableActions.deleteAggregate({ ...aggregate }));
     };
 
     const filterColIndexes = columns
@@ -62,7 +73,8 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({ aggregate }) => {
                     icon="trash"
                     intent="danger"
                     onClick={handleAggregateDelete}
-                ></Button>
+                    minimal={true}
+                />
             </div>
             <Divider />
             <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
@@ -77,7 +89,7 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({ aggregate }) => {
 
                     <TableColumnSelect
                         exclusionColumnIndexes={filterColIndexes}
-                        selectedColumnIndex={aggregate.columnIndex}
+                        selectedColumnIndex={updateAggregate.columnIndex}
                         onItemSelect={(col) =>
                             handleAggregateColumnSelect(col.columnIndex)
                         }
@@ -93,7 +105,7 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({ aggregate }) => {
                     <EntityTitle title={'Type'} heading={H6} />
 
                     <AggregateTypeSelect
-                        currentType={aggregate.type}
+                        currentType={updateAggregate.type}
                         onItemSelect={(aggType) =>
                             handleAggregateTypeSelect(aggType)
                         }
