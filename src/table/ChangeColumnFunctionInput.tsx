@@ -1,4 +1,4 @@
-import { ControlGroup } from '@blueprintjs/core';
+import { Button, ControlGroup } from '@blueprintjs/core';
 import * as React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
 import TableOperatorSelect from '../components/TableOperatorSelect';
@@ -11,48 +11,47 @@ import {
 } from '../types/tableTypes';
 
 interface EquationInputMenuProps {
-    column: OpviaTableColumn;
+    targetColumn: OpviaTableColumn;
 }
-
-interface ColumnFunctionUpdate {
-    columnFunctionKey: keyof ColumnFunction;
-    value: number | string;
-}
-interface ColumnFunctionColumnUpdate extends ColumnFunctionUpdate {
-    columnFunctionKey: 'colIndex1' | 'colIndex2';
-    value: number;
-}
-interface ColumnFunctionOperatorUpdate extends ColumnFunctionUpdate {
-    columnFunctionKey: 'operator';
-    value: ColumnFunctionOperator;
-}
-
-type ColumnFunctionUpdateInput =
-    | ColumnFunctionColumnUpdate
-    | ColumnFunctionOperatorUpdate;
 
 const ChangeColumnFunctionInput: React.FC<EquationInputMenuProps> = ({
-    column,
+    targetColumn,
 }) => {
     const dispatch = useAppDispatch();
     const { columns } = useAppSelector((state) => state.table);
+    const [column, setColumn] = React.useState<OpviaTableColumn>({
+        ...targetColumn,
+    });
 
-    const updateColumnFunction = ({
-        columnFunctionKey,
-        value,
-    }: ColumnFunctionUpdateInput) => {
-        const columnFunction = { ...column.columnFunction! };
-        if (columnFunctionKey === 'colIndex1') {
-            columnFunction.colIndex1 = value;
-        } else if (columnFunctionKey === 'colIndex2') {
-            columnFunction.colIndex2 = value;
-        } else if (columnFunctionKey === 'operator') {
-            columnFunction.operator = value;
-        }
+    const updateCol1Index = (column1Index: OpviaTableColumn) =>
+        setColumn((col) => {
+            return {
+                ...col,
+                colFunc: { ...col.columnFunction, colIndex1: column1Index },
+            };
+        });
+
+    const updateCol2Index = (column2Index: OpviaTableColumn) =>
+        setColumn((col) => {
+            return {
+                ...col,
+                colFunc: { ...col.columnFunction, colIndex2: column2Index },
+            };
+        });
+
+    const updateOperator = (operator: ColumnFunctionOperator) =>
+        setColumn((col) => {
+            return {
+                ...col,
+                colFunc: { ...col.columnFunction, operator: operator },
+            };
+        });
+
+    const handleConfirmClick = () => {
         dispatch(
             tableActions.updateColumnFunction({
                 columnIndex: column.columnIndex,
-                columnFunction,
+                columnFunction: column.columnFunction!,
             }),
         );
     };
@@ -69,21 +68,11 @@ const ChangeColumnFunctionInput: React.FC<EquationInputMenuProps> = ({
                     column.columnIndex,
                 ]}
                 selectedColumnIndex={column.columnFunction!.colIndex1}
-                onItemSelect={(item) =>
-                    updateColumnFunction({
-                        columnFunctionKey: 'colIndex1',
-                        value: item.columnIndex,
-                    })
-                }
+                onItemSelect={updateCol1Index}
             />
             <TableOperatorSelect
                 selectedOperator={column.columnFunction!.operator}
-                onItemSelect={(item) =>
-                    updateColumnFunction({
-                        columnFunctionKey: 'operator',
-                        value: item,
-                    })
-                }
+                onItemSelect={updateOperator}
             />
             <TableColumnSelect
                 exclusionColumnIndexes={[
@@ -91,12 +80,13 @@ const ChangeColumnFunctionInput: React.FC<EquationInputMenuProps> = ({
                     column.columnIndex,
                 ]}
                 selectedColumnIndex={column.columnFunction!.colIndex2}
-                onItemSelect={(item) =>
-                    updateColumnFunction({
-                        columnFunctionKey: 'colIndex2',
-                        value: item.columnIndex,
-                    })
-                }
+                onItemSelect={updateCol2Index}
+            />
+            <Button
+                rightIcon="confirm"
+                onClick={handleConfirmClick}
+                intent="primary"
+                text="confirm"
             />
         </ControlGroup>
     );
