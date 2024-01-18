@@ -1,22 +1,13 @@
 import {
     Button,
     Card,
-    ControlGroup,
     Divider,
-    EntityTitle,
-    H4,
-    H6,
     Icon,
-    Menu,
-    Popover,
+    Popover
 } from '@blueprintjs/core';
 import React from 'react';
-import TableColumnSelect from '../components/TableColumnSelect';
 import getAggregateIcon from '../core/getAggregateIcon';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import { tableActions } from '../redux/tableSlice';
-import { Aggregate, AggregateType } from '../types/analysisTypes';
-import AggregateTypeSelect from './AggregateTypeSelect';
+import { Aggregate } from '../types/analysisTypes';
 import AggregateCardMenu from './AggregateCardMenu';
 interface AggregateCardProps {
     aggregate: Aggregate;
@@ -31,7 +22,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
         alignItems: 'center',
         columnGap: 8,
         height: 60,
-        width: 240,
+        minWidth: 240,
     };
     let value: string;
     if (typeof aggregate.value === 'number') {
@@ -49,7 +40,7 @@ const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
                     />
                 }
                 isOpen={menuIsOpen}
-                placement="right"
+                placement="bottom-start"
             >
                 <Button
                     icon="cog"
