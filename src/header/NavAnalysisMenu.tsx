@@ -28,16 +28,18 @@ const NavAnalysisMenu: React.FC = () => {
 
     const columnMenu = (
         <Menu>
-            <MenuItem
-                icon="arrow-top-right"
-                onClick={() => addMaximumAggregate()}
-                text="Maximum"
-            />
-            <MenuItem
-                icon="arrow-bottom-left"
-                onClick={() => addMinimumAggregate()}
-                text="Minimum"
-            />
+            <MenuItem text={'Create Aggregate'} icon="minimize">
+                <MenuItem
+                    icon="arrow-top-right"
+                    onClick={() => addMaximumAggregate()}
+                    text="Column Maximum"
+                />
+                <MenuItem
+                    icon="arrow-bottom-left"
+                    onClick={() => addMinimumAggregate()}
+                    text="Column Minimum"
+                />
+            </MenuItem>
         </Menu>
     );
 

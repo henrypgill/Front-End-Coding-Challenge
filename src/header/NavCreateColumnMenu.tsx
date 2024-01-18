@@ -21,7 +21,7 @@ const AddFunctionColumnMenuItem: React.FC = () => {
     );
 };
 
-const NavAddColumnMenu: React.FC = () => {
+const NavCreateColumnMenu: React.FC = () => {
     const columnMenu = (
         <Menu>
             <AddFunctionColumnMenuItem />
@@ -35,10 +35,10 @@ const NavAddColumnMenu: React.FC = () => {
                 fill={true}
                 icon="add-column-right"
                 rightIcon="caret-down"
-                text="Add Column"
+                text="Create Column"
             />
         </Popover>
     );
 };
 
-export default NavAddColumnMenu;
+export default NavCreateColumnMenu;

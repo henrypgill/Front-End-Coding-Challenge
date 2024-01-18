@@ -1,19 +1,18 @@
 import {
+    Button,
+    ControlGroup,
+    Divider,
     EntityTitle,
     H4,
-    Button,
-    Divider,
-    ControlGroup,
     H6,
     Menu,
 } from '@blueprintjs/core';
-import TableColumnSelect from '../components/TableColumnSelect';
-import AggregateTypeSelect from './AggregateTypeSelect';
 import React from 'react';
+import TableColumnSelect from '../components/TableColumnSelect';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 import { Aggregate, AggregateType } from '../types/analysisTypes';
-import getAggregateValue from '../core/getAggregateValue';
+import AggregateTypeSelect from './AggregateTypeSelect';
 
 interface AggregateCardMenuProps {
     aggregate: Aggregate;
@@ -60,7 +59,7 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({
         .map((col) => col.columnIndex);
 
     return (
-        <Menu style={{ padding: 8 }}>
+        <Menu style={{ padding: 8, width: 240 }}>
             <div
                 style={{
                     display: 'flex',
@@ -77,7 +76,16 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({
                 />
             </div>
             <Divider />
-            <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
+            <ControlGroup
+                fill={false}
+                vertical={false}
+                style={{
+                    padding: 8,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                }}
+            >
                 <div
                     style={{
                         display: 'flex',
@@ -113,8 +121,17 @@ const AggregateCardMenu: React.FC<AggregateCardMenuProps> = ({
                 </div>
             </ControlGroup>
             <Divider />
-            <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                <Button intent="primary" onClick={handleAggregateUpdate}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Button intent="danger" onClick={() => setMenuIsOpen(false)}>
+                    Close
+                </Button>
+                <Button intent="success" onClick={handleAggregateUpdate}>
                     Save
                 </Button>
             </div>

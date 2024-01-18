@@ -5,7 +5,7 @@ import {
     InputGroup,
     Navbar,
 } from '@blueprintjs/core';
-import NavAddColumnMenu from './NavAddColumnMenu';
+import NavAddColumnMenu from './NavCreateColumnMenu';
 import NavAnalysisMenu from './NavAnalysisMenu';
 
 const OpviaNavbar: React.FC = () => {
