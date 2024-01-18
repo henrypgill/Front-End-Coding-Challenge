@@ -1,7 +1,7 @@
-import { MenuItem, Button } from '@blueprintjs/core';
+import { Button, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
-import { ColumnFunctionOperator } from '../types/tableTypes';
 import { getFunctionOperators } from '../core/getFunctionOperators';
+import { ColumnFunctionOperator } from '../types/tableTypes';
 
 interface TableOperatorSelectProps {
     selectedOperator: ColumnFunctionOperator;

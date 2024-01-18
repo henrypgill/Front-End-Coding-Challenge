@@ -1,14 +1,10 @@
 import {
-    Button,
     ControlGroup,
     EntityTitle,
     H6,
-    InputGroup,
+    InputGroup
 } from '@blueprintjs/core';
 import * as React from 'react';
-import { useAppDispatch } from '../redux/store';
-import { tableActions } from '../redux/tableSlice';
-import { OpviaTableColumn } from '../types/tableTypes';
 
 interface ChangeColumnNameInputProps {
     name: string;

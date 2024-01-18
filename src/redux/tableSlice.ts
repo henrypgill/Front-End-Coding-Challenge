@@ -1,15 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { dummyTableData } from '../core/dummyData';
-import { mapData } from '../core/mapData';
+import getAggregateValue from '../core/getAggregateValue';
+import { calculateFunctionColumnData } from '../core/performCalculation';
+import { Aggregate } from '../types/analysisTypes';
 import {
     ColumnFunction,
     OpviaTableColumn,
     TableData,
 } from '../types/tableTypes';
-import { Aggregate } from '../types/analysisTypes';
 import getInitialTableState from './initialStates';
-import getAggregateValue from '../core/getAggregateValue';
-import { calculateFunctionColumnData } from '../core/performCalculation';
 
 export interface Analysis {
     aggregates: Aggregate[];

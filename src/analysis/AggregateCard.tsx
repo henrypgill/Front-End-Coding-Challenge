@@ -1,10 +1,4 @@
-import {
-    Button,
-    Card,
-    Divider,
-    Icon,
-    Popover
-} from '@blueprintjs/core';
+import { Button, Card, Divider, Icon, Popover } from '@blueprintjs/core';
 import React from 'react';
 import getAggregateIcon from '../core/getAggregateIcon';
 import { Aggregate } from '../types/analysisTypes';

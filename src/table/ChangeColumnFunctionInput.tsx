@@ -5,9 +5,8 @@ import TableOperatorSelect from '../components/TableOperatorSelect';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 import {
-    ColumnFunction,
     ColumnFunctionOperator,
-    OpviaTableColumn,
+    OpviaTableColumn
 } from '../types/tableTypes';
 
 interface EquationInputMenuProps {

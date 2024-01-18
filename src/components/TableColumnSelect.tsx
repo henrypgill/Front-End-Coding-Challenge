@@ -1,5 +1,5 @@
-import { MenuItem, Button } from '@blueprintjs/core';
-import { Select, ItemRenderer } from '@blueprintjs/select';
+import { Button, MenuItem } from '@blueprintjs/core';
+import { ItemRenderer, Select } from '@blueprintjs/select';
 import { useAppSelector } from '../redux/store';
 import { OpviaTableColumn } from '../types/tableTypes';
 

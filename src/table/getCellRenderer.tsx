@@ -1,4 +1,4 @@
-import { CellRenderer, Cell } from '@blueprintjs/table';
+import { Cell, CellRenderer } from '@blueprintjs/table';
 import { OpviaTableColumn, TableData } from '../types/tableTypes';
 
 const getCellRenderer = (column: OpviaTableColumn, data: TableData) => {
