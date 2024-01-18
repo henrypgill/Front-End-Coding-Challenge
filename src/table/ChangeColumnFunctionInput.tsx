@@ -4,10 +4,7 @@ import TableColumnSelect from '../components/TableColumnSelect';
 import TableOperatorSelect from '../components/TableOperatorSelect';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
-import {
-    ColumnFunctionOperator,
-    OpviaTableColumn
-} from '../types/tableTypes';
+import { ColumnFunctionOperator, OpviaTableColumn } from '../types/tableTypes';
 
 interface EquationInputMenuProps {
     targetColumn: OpviaTableColumn;

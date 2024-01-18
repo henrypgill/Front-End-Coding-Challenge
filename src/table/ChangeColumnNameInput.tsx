@@ -1,9 +1,4 @@
-import {
-    ControlGroup,
-    EntityTitle,
-    H6,
-    InputGroup
-} from '@blueprintjs/core';
+import { ControlGroup, EntityTitle, H6, InputGroup } from '@blueprintjs/core';
 import * as React from 'react';
 
 interface ChangeColumnNameInputProps {

@@ -85,7 +85,10 @@ const ColumnSettingsMenu: React.FC<ColumnSettingsMenuProps> = ({
     };
 
     const filterColIndexes = columns
-        .filter((col) => col.columnType !== 'number')
+        .filter(
+            (col) =>
+                !(col.columnType === 'number' || col.columnType === 'function'),
+        )
         .map((col) => col.columnIndex);
 
     return (
