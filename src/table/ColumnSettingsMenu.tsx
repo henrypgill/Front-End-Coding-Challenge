@@ -1,4 +1,12 @@
-import { Button, ControlGroup, Divider, Menu } from '@blueprintjs/core';
+import {
+    Button,
+    ControlGroup,
+    Divider,
+    EntityTitle,
+    H4,
+    H6,
+    Menu,
+} from '@blueprintjs/core';
 import * as React from 'react';
 import TableColumnSelect from '../components/TableColumnSelect';
 import TableOperatorSelect from '../components/TableOperatorSelect';
@@ -27,6 +35,18 @@ const ColumnSettingsMenu: React.FC<ColumnSettingsMenuProps> = ({
     const [columnFunction, setColumnFunction] = React.useState<ColumnFunction>({
         ...column.columnFunction!,
     });
+    const [name, setName] = React.useState(column.columnName);
+    const [units, setUnits] = React.useState(column.columnUnits);
+
+    const updateColumnNameAndUnits = () => {
+        dispatch(
+            tableActions.updateColumnNameAndUnits({
+                columnIndex: column.columnIndex,
+                columnName: name,
+                columnUnits: units,
+            }),
+        );
+    };
 
     const updateCol1Index = (column1: OpviaTableColumn) =>
         setColumnFunction((colFunc) => {
@@ -43,14 +63,19 @@ const ColumnSettingsMenu: React.FC<ColumnSettingsMenuProps> = ({
             return { ...colFunc, operator };
         });
 
-    const handleConfirmClick = () => {
+    const updateColumnFunction = () => {
         dispatch(
             tableActions.updateColumnFunction({
                 columnIndex: column.columnIndex,
                 columnFunction: columnFunction,
             }),
         );
+    };
+
+    const handleConfirmClick = () => {
         setOpenColumnMenuIndex(undefined);
+        updateColumnFunction();
+        updateColumnNameAndUnits();
     };
 
     const handleColumnDelete = () => {
@@ -71,9 +96,14 @@ const ColumnSettingsMenu: React.FC<ColumnSettingsMenuProps> = ({
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'baseline',
+                    marginBottom: 16,
                 }}
             >
-                <strong>Settings</strong>
+                <EntityTitle
+                    title={'Column Settings'}
+                    subtitle={`Column Type: ${column.columnType}`}
+                    heading={H4}
+                />
 
                 <Button
                     icon="trash"
@@ -82,61 +112,102 @@ const ColumnSettingsMenu: React.FC<ColumnSettingsMenuProps> = ({
                     minimal={true}
                 />
             </div>
-            <Divider />
-            <ChangeColumnNameInput
-                column={column}
-                onConfirmClick={() => setOpenColumnMenuIndex(undefined)}
-            />
+            <div>
+                <strong>Column Name and Units</strong>
+                <Divider />
+                <ChangeColumnNameInput
+                    name={name}
+                    setName={setName}
+                    units={units}
+                    setUnits={setUnits}
+                />
+            </div>
             {column.columnType === 'function' && (
-                <>
+                <div>
                     <strong>Equation</strong>
                     <Divider />
 
                     <ControlGroup
-                        fill={false}
                         vertical={false}
-                        style={{ padding: 8 }}
+                        style={{
+                            padding: 8,
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
+                            columnGap: 8,
+                        }}
                     >
-                        <TableColumnSelect
-                            exclusionColumnIndexes={[
-                                ...filterColIndexes,
-                                column.columnIndex,
-                            ]}
-                            selectedColumnIndex={columnFunction.colIndex1}
-                            onItemSelect={updateCol1Index}
-                        />
-                        <TableOperatorSelect
-                            selectedOperator={columnFunction.operator}
-                            onItemSelect={updateOperator}
-                        />
-                        <TableColumnSelect
-                            exclusionColumnIndexes={[
-                                ...filterColIndexes,
-                                column.columnIndex,
-                            ]}
-                            selectedColumnIndex={columnFunction.colIndex2}
-                            onItemSelect={updateCol2Index}
-                        />
-                        <Button
-                            rightIcon="confirm"
-                            onClick={handleConfirmClick}
-                            intent="primary"
-                            text="confirm"
-                        />
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                rowGap: 4,
+                                width: 100,
+                            }}
+                        >
+                            <EntityTitle title={'Column 1'} heading={H6} />
+                            <TableColumnSelect
+                                exclusionColumnIndexes={[
+                                    ...filterColIndexes,
+                                    column.columnIndex,
+                                ]}
+                                selectedColumnIndex={columnFunction.colIndex1}
+                                onItemSelect={updateCol1Index}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                rowGap: 4,
+                            }}
+                        >
+                            <EntityTitle title={'Operation'} heading={H6} />
+                            <TableOperatorSelect
+                                selectedOperator={columnFunction.operator}
+                                onItemSelect={updateOperator}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                rowGap: 4,
+                                width: 100,
+                            }}
+                        >
+                            <EntityTitle title={'Column 2'} heading={H6} />
+                            <TableColumnSelect
+                                exclusionColumnIndexes={[
+                                    ...filterColIndexes,
+                                    column.columnIndex,
+                                ]}
+                                selectedColumnIndex={columnFunction.colIndex2}
+                                onItemSelect={updateCol2Index}
+                            />
+                        </div>
                     </ControlGroup>
-                </>
+                </div>
             )}
             <Divider />
             <div
                 style={{
                     display: 'flex',
-                    flexDirection: 'row-reverse',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    columnGap: 8,
                 }}
             >
                 <Button
-                    text="close"
+                    text="Close"
                     intent="danger"
                     onClick={() => setOpenColumnMenuIndex(undefined)}
+                />
+                <Button
+                    text="Save"
+                    intent="success"
+                    onClick={() => handleConfirmClick()}
                 />
             </div>
         </Menu>

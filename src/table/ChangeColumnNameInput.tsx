@@ -1,60 +1,73 @@
-import { Button, ControlGroup, InputGroup } from '@blueprintjs/core';
+import {
+    Button,
+    ControlGroup,
+    EntityTitle,
+    H6,
+    InputGroup,
+} from '@blueprintjs/core';
 import * as React from 'react';
 import { useAppDispatch } from '../redux/store';
 import { tableActions } from '../redux/tableSlice';
 import { OpviaTableColumn } from '../types/tableTypes';
 
 interface ChangeColumnNameInputProps {
-    column: OpviaTableColumn;
-    onConfirmClick: () => void;
+    name: string;
+    units: string;
+    setName: React.Dispatch<React.SetStateAction<string>>;
+    setUnits: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ChangeColumnNameInput: React.FC<ChangeColumnNameInputProps> = ({
-    column,
-    onConfirmClick,
+    name,
+    units,
+    setName,
+    setUnits,
 }) => {
-    const dispatch = useAppDispatch();
-    const [name, setName] = React.useState(column.columnName);
-    const [units, setUnits] = React.useState(column.columnUnits);
-
-    const updateColumnNameAndUnits = () => {
-        dispatch(
-            tableActions.updateColumnNameAndUnits({
-                columnIndex: column.columnIndex,
-                columnName: name,
-                columnUnits: units,
-            }),
-        );
-    };
-
-    const handleConfirmClick = () => {
-        onConfirmClick();
-        updateColumnNameAndUnits();
-    };
-
     return (
-        <ControlGroup fill={false} vertical={false} style={{ padding: 8 }}>
-            <InputGroup
-                placeholder="Name"
-                value={name}
-                onValueChange={(val) => setName(val)}
-                fill={false}
-                style={{ width: 124 }}
-            />
-            <InputGroup
-                placeholder="Units"
-                value={units}
-                onValueChange={(val) => setUnits(val)}
-                fill={false}
-                style={{ width: 124 }}
-            />
-            <Button
-                rightIcon="confirm"
-                onClick={handleConfirmClick}
-                intent="primary"
+        <ControlGroup
+            fill={false}
+            vertical={false}
+            style={{
+                padding: 8,
+                display: 'flex',
+                flexDirection: 'row',
+                columnGap: 8,
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    rowGap: 4,
+                }}
             >
-                Confirm
-            </Button>
+                <EntityTitle title={'Name'} heading={H6} />
+
+                <InputGroup
+                    placeholder="Name"
+                    value={name}
+                    onValueChange={(val) => setName(val)}
+                    fill={false}
+                    style={{ width: 124 }}
+                />
+            </div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    rowGap: 4,
+                }}
+            >
+                <EntityTitle title={'Units'} heading={H6} />
+
+                <InputGroup
+                    placeholder="Units"
+                    value={units}
+                    onValueChange={(val) => setUnits(val)}
+                    fill={false}
+                    style={{ width: 124 }}
+                />
+            </div>
         </ControlGroup>
     );
 };
