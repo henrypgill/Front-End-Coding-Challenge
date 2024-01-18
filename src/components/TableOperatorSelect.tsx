@@ -40,8 +40,9 @@ const TableOperatorSelect: React.FC<TableOperatorSelectProps> = ({
             items={operators}
             onItemSelect={(item) => onItemSelect(item)}
             itemRenderer={selectItemRenderer}
+            fill={true}
         >
-            <Button text={selectedOperator} />
+            <Button text={selectedOperator} fill={true} />
         </Select>
     );
 };

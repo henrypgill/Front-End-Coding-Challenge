@@ -49,8 +49,9 @@ const TableColumnSelect: React.FC<TableColumnSelectProps> = ({
             items={columnOptions}
             onItemSelect={(item) => onItemSelect(item)}
             itemRenderer={selectItemRenderer}
+            fill={true}
         >
-            <Button text={selectedColumn.columnName} />
+            <Button text={selectedColumn.columnName} fill={true} />
         </Select>
     );
 };
