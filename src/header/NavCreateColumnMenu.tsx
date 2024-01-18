@@ -1,9 +1,9 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core';
 import * as React from 'react';
-import { tableActions } from '../redux/tableSlice';
 import { useAppDispatch } from '../redux/store';
+import { tableActions } from '../redux/tableSlice';
 
-const AddFxColumn: React.FC = () => {
+const AddFunctionColumnMenuItem: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const addFxColumnHandler = () => {
@@ -21,10 +21,10 @@ const AddFxColumn: React.FC = () => {
     );
 };
 
-const ColumnActionsMenu: React.FC = () => {
+const NavCreateColumnMenu: React.FC = () => {
     const columnMenu = (
         <Menu>
-            <AddFxColumn />
+            <AddFunctionColumnMenuItem />
         </Menu>
     );
 
@@ -35,10 +35,10 @@ const ColumnActionsMenu: React.FC = () => {
                 fill={true}
                 icon="add-column-right"
                 rightIcon="caret-down"
-                text="Add Column"
+                text="Create Column"
             />
         </Popover>
     );
 };
 
-export default ColumnActionsMenu;
+export default NavCreateColumnMenu;

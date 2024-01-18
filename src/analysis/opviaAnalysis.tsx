@@ -1,128 +1,84 @@
-import { Button, Card, Icon, Section } from '@blueprintjs/core';
-import * as React from 'react';
-import TableColumnSelect from '../components/TableColumnSelect';
-import {
-    Aggregate,
-    AggregateUpdate,
-    analysisActions,
-} from '../redux/analysisSlice';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import AggregateTypeSelect from './AggregateTypeSelect';
-import getAggregateIcon from './getAggregateIcon';
-import getAggregateValue from './getAggregateValue';
+import { Card, EntityTitle, H4, Section } from '@blueprintjs/core';
+import { useAppSelector } from '../redux/store';
+import { Aggregate } from '../types/analysisTypes';
+import AggregateCard from './AggregateCard';
 
-interface AggregateCardProps {
-    aggregate: Aggregate;
+interface AnalysisColumnSectionProps {
+    columnName: string;
+    aggregates: Aggregate[];
 }
-const AggregateCard: React.FC<AggregateCardProps> = ({ aggregate }) => {
-    const dispatch = useAppDispatch();
-    const { columns, data } = useAppSelector((state) => state.table);
-    const column = columns.find(
-        (col) => col.columnIndex === aggregate.columnIndex,
-    )!;
-    const [editing, setEditing] = React.useState(false);
 
-    const handleAggregateUpdate = ({ key, value }: AggregateUpdate) => {
-        let dispatchAction: Aggregate;
-        if (key === 'type') {
-            dispatchAction = {
-                ...aggregate,
-                type: value,
-                value: getAggregateValue(data[column.columnIndex], value),
-            };
-        } else if (key === 'columnIndex') {
-            dispatchAction = {
-                ...aggregate,
-                columnIndex: value,
-                value: getAggregateValue(data[value], aggregate.type),
-            };
-        } else {
-            dispatchAction = aggregate;
-        }
-
-        dispatch(analysisActions.updateAggregate(dispatchAction));
-    };
-
-    const cardStyle: React.CSSProperties = {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 200,
-        rowGap: 8,
-        height: 200,
-    };
-
-    const filterColIndexes = columns
-        .filter((col) => {
-            if (col.columnType === 'function') return false;
-            else if (col.columnType === 'number') return false;
-            else return true;
-        })
-        .map((col) => col.columnIndex);
-
-    if (editing) {
-        return (
-            <Card style={cardStyle} interactive={true}>
-                <div className="flex-col">
-                    <TableColumnSelect
-                        exclusionColumnIndexes={filterColIndexes}
-                        selectedColumnIndex={aggregate.columnIndex}
-                        onItemSelect={(col) =>
-                            handleAggregateUpdate({
-                                key: 'columnIndex',
-                                value: col.columnIndex,
-                            })
-                        }
-                    />
-                    <AggregateTypeSelect
-                        currentType={aggregate.type}
-                        onItemSelect={(aggType) =>
-                            handleAggregateUpdate({
-                                key: 'type',
-                                value: aggType,
-                            })
-                        }
-                    />
-                    <Button intent="primary" onClick={() => setEditing(false)}>
-                        Done
-                    </Button>
-                </div>
-            </Card>
-        );
-    }
-
+const AnalysisColumnCard: React.FC<AnalysisColumnSectionProps> = ({
+    columnName,
+    aggregates,
+}) => {
+    const aggregateCards = () =>
+        aggregates.map((agg) => (
+            <AggregateCard key={agg.aggregateId} aggregate={agg} />
+        ));
     return (
         <Card
-            style={cardStyle}
-            onClick={() => setEditing(true)}
-            interactive={true}
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                rowGap: 8,
+            }}
         >
-            <div>
-                <Icon icon={getAggregateIcon(aggregate.type)} size={20} />
-            </div>
-            <div>
-                <h2>
-                    {`${aggregate.type} ${column.columnName}`.toLowerCase()}
-                </h2>
-                <h3>{aggregate.value}</h3>
-            </div>
+            <EntityTitle title={columnName} heading={H4} />
+            {aggregateCards()}
         </Card>
     );
 };
 
-const Analysis = () => {
-    const analysis = useAppSelector((state) => state.analysis);
+const OpviaAnalysis = () => {
+    const {
+        analysis: { aggregates },
+        columns,
+    } = useAppSelector((state) => state.table);
 
-    if (!analysis.aggregates[0]) return <></>;
-    const aggregateCards = analysis.aggregates.map((agg) => (
+    if (!aggregates[0]) return <></>;
+    const aggregateCards = aggregates.map((agg) => (
         <AggregateCard aggregate={agg} key={agg.aggregateId} />
     ));
 
+    const analysisColumnSections = columns.map((col) => {
+        const colAggregates = aggregates.filter(
+            (agg) => agg.columnIndex === col.columnIndex,
+        );
+        if (!colAggregates[0]) return undefined;
+        return (
+            <AnalysisColumnCard
+                columnName={col.columnName}
+                aggregates={colAggregates}
+                key={col.columnId}
+            />
+        );
+    });
+
     return (
-        <Section title={'Aggregates'}>
-            <div className="flex-row">{aggregateCards}</div>
+        <Section
+            title={'Analysis'}
+            icon="chart"
+            style={{
+                padding: 16,
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+            }}
+        >
+            <div
+                style={{
+                    padding: 8,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    columnGap: 16,
+                }}
+            >
+                {analysisColumnSections}
+            </div>
         </Section>
     );
 };
 
-export default Analysis;
+export default OpviaAnalysis;

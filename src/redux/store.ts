@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import analysisReducer from './analysisSlice';
 import tableReducer from './tableSlice';
 
 // export a type that represents the data structure of the store
@@ -11,7 +10,6 @@ type AppDispatch = typeof store.dispatch;
 const store = configureStore({
     reducer: {
         table: tableReducer,
-        analysis: analysisReducer,
     },
 });
 export default store;

@@ -1,15 +1,15 @@
 import { Button, Menu, MenuItem, Popover } from '@blueprintjs/core';
-import getAggregateValue from '../analysis/getAggregateValue';
-import { analysisActions } from '../redux/analysisSlice';
+import getAggregateValue from '../core/getAggregateValue';
 import { useAppDispatch, useAppSelector } from '../redux/store';
+import { tableActions } from '../redux/tableSlice';
 
-const AnalyseActionsMenu: React.FC = () => {
+const NavAnalysisMenu: React.FC = () => {
     const dispatch = useAppDispatch();
     const data = useAppSelector((state) => state.table.data);
 
     const addMaximumAggregate = () => {
         dispatch(
-            analysisActions.addAggregate({
+            tableActions.addAggregate({
                 type: 'maximum',
                 columnIndex: 1,
                 value: getAggregateValue(data[1], 'maximum'),
@@ -18,7 +18,7 @@ const AnalyseActionsMenu: React.FC = () => {
     };
     const addMinimumAggregate = () => {
         dispatch(
-            analysisActions.addAggregate({
+            tableActions.addAggregate({
                 type: 'minimum',
                 columnIndex: 1,
                 value: getAggregateValue(data[1], 'minimum'),
@@ -28,16 +28,18 @@ const AnalyseActionsMenu: React.FC = () => {
 
     const columnMenu = (
         <Menu>
-            <MenuItem
-                icon="arrow-top-right"
-                onClick={() => addMaximumAggregate()}
-                text="Maximum"
-            />
-            <MenuItem
-                icon="arrow-bottom-left"
-                onClick={() => addMinimumAggregate()}
-                text="Minimum"
-            />
+            <MenuItem text={'Create Aggregate'} icon="minimize">
+                <MenuItem
+                    icon="arrow-top-right"
+                    onClick={() => addMaximumAggregate()}
+                    text="Column Maximum"
+                />
+                <MenuItem
+                    icon="arrow-bottom-left"
+                    onClick={() => addMinimumAggregate()}
+                    text="Column Minimum"
+                />
+            </MenuItem>
         </Menu>
     );
 
@@ -54,4 +56,4 @@ const AnalyseActionsMenu: React.FC = () => {
     );
 };
 
-export default AnalyseActionsMenu;
+export default NavAnalysisMenu;

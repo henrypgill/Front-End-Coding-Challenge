@@ -1,6 +1,7 @@
-import { MenuItem, Button } from '@blueprintjs/core';
+import { Button, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, Select } from '@blueprintjs/select';
-import { ColumnFunctionOperator } from '../redux/tableSlice';
+import { getFunctionOperators } from '../core/getFunctionOperators';
+import { ColumnFunctionOperator } from '../types/tableTypes';
 
 interface TableOperatorSelectProps {
     selectedOperator: ColumnFunctionOperator;
@@ -14,7 +15,7 @@ const TableOperatorSelect: React.FC<TableOperatorSelectProps> = ({
     selectedOperator,
     onItemSelect,
 }) => {
-    const operators: ColumnFunctionOperator[] = ['*', '/', '+', '-'];
+    const operators = getFunctionOperators();
 
     const selectItemRenderer: ItemRenderer<ColumnFunctionOperator> = (
         operator,
@@ -39,8 +40,9 @@ const TableOperatorSelect: React.FC<TableOperatorSelectProps> = ({
             items={operators}
             onItemSelect={(item) => onItemSelect(item)}
             itemRenderer={selectItemRenderer}
+            fill={true}
         >
-            <Button text={selectedOperator} />
+            <Button text={selectedOperator} fill={true} />
         </Select>
     );
 };

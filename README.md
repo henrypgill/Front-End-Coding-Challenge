@@ -16,7 +16,9 @@ The repository has several scripts that can be run from the root directory. Thes
 
 ## How to use the app
 
-The app presents the user with a navigation bar at the top of the screen, within which are several buttons that provide the user with access to functionality. Column headers within the table can be moused over to access the menu for that column, which allows the user to edit the column's name and type.
+-   The app presents the user with a navigation bar at the top of the screen, within which are several buttons that provide the user with access to functionality.
+-   Column headers within the table can be moused over to access the menu for that column, which allows the user to edit the column's name and type.
+-   The name and units of a column can be changed through it's menu, as well as the ability to delete the column altogether.
 
 ### Calculation Columns
 
@@ -24,30 +26,32 @@ Calculation columns can be added from the `Add Column` menu in the navigation ba
 
 ### Column Aggregations
 
-Column aggregations can be added from the `Analysis` menu in the navigation bar, where the type of aggregrate to be added can be selected. Once an aggregate is added it will appear in the analysis section of the app.
-An aggregate that has already been added can be clicked on to bring up the menu to change the type of aggregate and it's target column.
+Column aggregations can be added from the `Analysis` menu in the navigation bar, where the type of aggregrate to be added can be selected. Once an aggregate is added it will appear in the analysis section under its respective column of the app. The aggregate can be changed or removed from the settings menu, accessed from the cog icon to its left.
 
 ## Improvements
 
-Several improvements could be made to the app to improve the user experience and it's functionality. Additional features such as the ability to add graphs from the analysis menu, or delete columns from the table would be beneficial to the user when looking data. There are also several improvements that can be made to the existing features of the app:
+Several improvements could be made to the app to improve the user experience and it's functionality:
 
 -   ### Aggregates
 
-    -   The way the aggregates are displayed is overly large, a condensed view would be beneficial and take up less visual real-estate.
-    -   It is also not clear to the user that the aggregate is clickable, and that clicking on it will bring up the menu. A menu or edit icon in the corner of each card would be a far better way of presenting these interactions to the user.
-    -   Aggregates performed on calculation columns don't update when the column formula is changed. This is largely due to the seperation of the table and the aggregates, and could be fixed by having the table and the aggregates share the same state.
+    -   Aggregate menus don't dismiss when clicking outside of the menu, this is a limitation of my familiarity with blueprint.js and could be fixed after some more experience with the library.
+    -   Additional types of aggregates would allow the user to receive better insights.
+    -   Currently duplicate aggregates can be created, disabling this would reduce visual noise and smooth the users experience.
 
 -   ### Columns
 
-    -   The menu dismisses every time a change is made to the formula of a calculation column, which can be frustrating if the user is trying to make several changes at once. The menu could be improved by allowing the user to dismiss it manually, or by only dismissing it when the user clicks outside of the menu.
     -   The complexity of formulas that are able to be entered is rather limited, integrating a library such as math.js would allow for more complex formulas to be entered by the user as a string, which would additionally make a big improvement to the user experience.
     -   The menu for all columns would benefit from additional functionality, such as sorting or changing how the data is displayed.
+    -   The closing of column menus is a bit laggy, this could be improved but would require a deeper dive into blueprint.js.
+    -   The way time is formatted would depend on the users preference, I have opted for this format as it conveys the most information. However measuring it in days or hours from an initial time may be the most appropriate way to display the data.
+    -   The way column data is calculated and stored would benefit from being redesigned.
+    -   A function column that depends on another function column will not update when the column it depends on is changed, this is a limitation of the current implementation and would be best solved by changing how column data is stored. At present the column function has to be "saved" to recalculate.
 
 -   ### General
-    -   The way state is structured works, but will likely become difficult to work with as more functionality is added to the app. the seperation of column information and data creates a degree of seperation between two related entities that is unnecessary, and also slightly counterintuitive.
-    -   Greater use of Blueprintjs' intent system would improve the visuals of the app, and help better guide the user through its' use.
-    -   The way the menu icon of columns is displayed does not match the styling of the rest of the app, and could be better formatted.
-    -   I am not entirely happy with how I have structured the types, it would be better to determine exactly how the data is formatted, whether this is a string or a number, and have a better structure for the types of the columns and the type of data within them.
+    -   Tooltips on buttons such as the column delete, and menu items in the nav with a description of what they are would help the user understand the app better.
+    -   The ability to choose how the page is displayed, (e.g. only the full table, the table and the analysis, or a custom view) would be a good addition to the app.
+    -   Additional functionality such as the ability to saving the data to a file, or creating a graph from the table data.
+    -   Some elements would benefit from slight chagnes to padding and margins to really make the app look polished.
 
 ## Rate of Change Calculations
 
