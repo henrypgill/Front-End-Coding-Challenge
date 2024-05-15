@@ -9,10 +9,10 @@ I am mostly happy with how this turned out; having a better understanding how bl
 Install the dependencies by running `yarn` or `npm install`
 The repository has several scripts that can be run from the root directory. These can be run with `yarn [command]` or `npm run [command]` in your terminal from the root directory, the `[command]`s are as follows:
 
--   To preview the app in your browser: `dev`
--   To build the app for deployment: `build`
--   To type check the repository: `type-check`
--   To format code within the repository: `format`
+-   To preview the app in your browser: `yarn start`
+-   To build the app for deployment: `yarn build`
+-   To type check the repository: `yarn type-check`
+-   To format code within the repository: `yarn format`
 
 ## How to use the app
 
